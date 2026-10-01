@@ -10,7 +10,7 @@ export function CrudPage({
   table, idKey = "id", title, crumb, desc, cols, fields, statuses, addLabel, above,
 }: {
   table: TableName; idKey?: string; title: string; crumb: string; desc: string;
-  cols: Col<any>[]; fields: FieldDef[]; statuses?: string[]; addLabel: string;
+  cols: Col<any>[]; fields: FieldDef[]; statuses?: string[] | undefined; addLabel: string;
   above?: (rows: any[]) => ReactNode;
 }) {
   const { data = [], isLoading, error } = useRows(table);
@@ -30,7 +30,7 @@ export function CrudPage({
 
   const submit = async () => {
     const missing = fields.find((f) => f.required && !form[f.key]?.trim());
-    if (missing) return toast.error(`${missing.label} is required`);
+    if (missing) { toast.error(`${missing.label} is required`); return; }
     const values: Record<string, unknown> = {};
     fields.forEach((f) => (values[f.key] = f.type === "number" ? Number(form[f.key]) || 0 : form[f.key]?.trim()));
     try {

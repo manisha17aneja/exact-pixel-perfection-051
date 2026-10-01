@@ -44,7 +44,7 @@ export type Col<T> = { key: string; label: string; render: (r: T) => ReactNode; 
 export function DataTable<T extends Record<string, any>>({
   rows, cols, idKey, filterKey, filters, onRow, addLabel, onAdd, onBulkDelete,
 }: {
-  rows: T[]; cols: Col<T>[]; idKey: keyof T | string; filterKey?: keyof T; filters?: string[];
+  rows: T[]; cols: Col<T>[]; idKey: keyof T | string; filterKey?: keyof T | string | undefined; filters?: string[] | undefined;
   onRow?: (r: T) => void; addLabel?: string; onAdd?: () => void; onBulkDelete?: (ids: string[]) => void;
 }) {
   const [q, setQ] = useState("");

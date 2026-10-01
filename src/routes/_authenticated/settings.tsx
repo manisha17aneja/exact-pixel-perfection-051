@@ -51,13 +51,13 @@ function SettingsPage() {
 
   const saveName = async () => {
     const { error } = await supabase.from("profiles").update({ name: name ?? "" }).eq("id", data!.me!);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Profile saved"); qc.invalidateQueries({ queryKey: ["team"] });
   };
   const changeRole = async (userId: string, role: Role) => {
     await supabase.from("user_roles").delete().eq("user_id", userId);
     const { error } = await supabase.from("user_roles").insert({ user_id: userId, role });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Role updated"); qc.invalidateQueries({ queryKey: ["team"] });
   };
 
