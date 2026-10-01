@@ -21,8 +21,8 @@ function SidebarBody({ onNav }: { onNav?: () => void }) {
   const path = useRouterState({ select: (s) => s.location.pathname });
   return (
     <>
-      <div className="flex h-14 items-center gap-2 border-b border-sidebar-border px-4">
-        <div className="grid h-7 w-7 place-items-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground"><Truck className="h-4 w-4" /></div>
+      <div className="flex h-16 items-center gap-2.5 px-5">
+        <div className="grid h-8 w-8 place-items-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground"><Truck className="h-4 w-4" /></div>
         <span className="font-display text-lg font-bold tracking-tight text-sidebar-accent-foreground">Haulwise</span>
       </div>
       <nav className="flex-1 space-y-6 overflow-y-auto px-3 py-4">
