@@ -9,148 +9,148 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as BookingsRouteImport } from './routes/bookings'
-import { Route as ContactsRouteImport } from './routes/contacts'
-import { Route as CustomersRouteImport } from './routes/customers'
-import { Route as ExpensesRouteImport } from './routes/expenses'
-import { Route as FleetRouteImport } from './routes/fleet'
-import { Route as FollowUpsRouteImport } from './routes/follow-ups'
-import { Route as InvoicesRouteImport } from './routes/invoices'
-import { Route as LeadsRouteImport } from './routes/leads'
-import { Route as QuotationsRouteImport } from './routes/quotations'
-import { Route as ReportsRouteImport } from './routes/reports'
-import { Route as SettingsRouteImport } from './routes/settings'
-import { Route as ShipmentsRouteImport } from './routes/shipments'
-import { Route as TripsRouteImport } from './routes/trips'
+import { Route as AuthenticatedBookingsRouteImport } from './routes/_authenticated/bookings'
+import { Route as AuthenticatedContactsRouteImport } from './routes/_authenticated/contacts'
+import { Route as AuthenticatedCustomersRouteImport } from './routes/_authenticated/customers'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedExpensesRouteImport } from './routes/_authenticated/expenses'
+import { Route as AuthenticatedFleetRouteImport } from './routes/_authenticated/fleet'
+import { Route as AuthenticatedFollowUpsRouteImport } from './routes/_authenticated/follow-ups'
+import { Route as AuthenticatedInvoicesRouteImport } from './routes/_authenticated/invoices'
+import { Route as AuthenticatedLeadsRouteImport } from './routes/_authenticated/leads'
+import { Route as AuthenticatedQuotationsRouteImport } from './routes/_authenticated/quotations'
+import { Route as AuthenticatedReportsRouteImport } from './routes/_authenticated/reports'
+import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
+import { Route as AuthenticatedShipmentsRouteImport } from './routes/_authenticated/shipments'
+import { Route as AuthenticatedTripsRouteImport } from './routes/_authenticated/trips'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BookingsRoute = BookingsRouteImport.update({
-  id: '/bookings',
+const AuthenticatedBookingsRoute = AuthenticatedBookingsRouteImport.update({
+  id: '/_authenticated/bookings',
   path: '/bookings',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ContactsRoute = ContactsRouteImport.update({
-  id: '/contacts',
+const AuthenticatedContactsRoute = AuthenticatedContactsRouteImport.update({
+  id: '/_authenticated/contacts',
   path: '/contacts',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CustomersRoute = CustomersRouteImport.update({
-  id: '/customers',
+const AuthenticatedCustomersRoute = AuthenticatedCustomersRouteImport.update({
+  id: '/_authenticated/customers',
   path: '/customers',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ExpensesRoute = ExpensesRouteImport.update({
-  id: '/expenses',
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/_authenticated/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedExpensesRoute = AuthenticatedExpensesRouteImport.update({
+  id: '/_authenticated/expenses',
   path: '/expenses',
   getParentRoute: () => rootRouteImport,
 } as any)
-const FleetRoute = FleetRouteImport.update({
-  id: '/fleet',
+const AuthenticatedFleetRoute = AuthenticatedFleetRouteImport.update({
+  id: '/_authenticated/fleet',
   path: '/fleet',
   getParentRoute: () => rootRouteImport,
 } as any)
-const FollowUpsRoute = FollowUpsRouteImport.update({
-  id: '/follow-ups',
+const AuthenticatedFollowUpsRoute = AuthenticatedFollowUpsRouteImport.update({
+  id: '/_authenticated/follow-ups',
   path: '/follow-ups',
   getParentRoute: () => rootRouteImport,
 } as any)
-const InvoicesRoute = InvoicesRouteImport.update({
-  id: '/invoices',
+const AuthenticatedInvoicesRoute = AuthenticatedInvoicesRouteImport.update({
+  id: '/_authenticated/invoices',
   path: '/invoices',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LeadsRoute = LeadsRouteImport.update({
-  id: '/leads',
+const AuthenticatedLeadsRoute = AuthenticatedLeadsRouteImport.update({
+  id: '/_authenticated/leads',
   path: '/leads',
   getParentRoute: () => rootRouteImport,
 } as any)
-const QuotationsRoute = QuotationsRouteImport.update({
-  id: '/quotations',
+const AuthenticatedQuotationsRoute = AuthenticatedQuotationsRouteImport.update({
+  id: '/_authenticated/quotations',
   path: '/quotations',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ReportsRoute = ReportsRouteImport.update({
-  id: '/reports',
+const AuthenticatedReportsRoute = AuthenticatedReportsRouteImport.update({
+  id: '/_authenticated/reports',
   path: '/reports',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SettingsRoute = SettingsRouteImport.update({
-  id: '/settings',
+const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
+  id: '/_authenticated/settings',
   path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ShipmentsRoute = ShipmentsRouteImport.update({
-  id: '/shipments',
+const AuthenticatedShipmentsRoute = AuthenticatedShipmentsRouteImport.update({
+  id: '/_authenticated/shipments',
   path: '/shipments',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TripsRoute = TripsRouteImport.update({
-  id: '/trips',
+const AuthenticatedTripsRoute = AuthenticatedTripsRouteImport.update({
+  id: '/_authenticated/trips',
   path: '/trips',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/bookings': typeof BookingsRoute
-  '/contacts': typeof ContactsRoute
-  '/customers': typeof CustomersRoute
-  '/expenses': typeof ExpensesRoute
-  '/fleet': typeof FleetRoute
-  '/follow-ups': typeof FollowUpsRoute
-  '/invoices': typeof InvoicesRoute
-  '/leads': typeof LeadsRoute
-  '/quotations': typeof QuotationsRoute
-  '/reports': typeof ReportsRoute
-  '/settings': typeof SettingsRoute
-  '/shipments': typeof ShipmentsRoute
-  '/trips': typeof TripsRoute
+  '/bookings': typeof AuthenticatedBookingsRoute
+  '/contacts': typeof AuthenticatedContactsRoute
+  '/customers': typeof AuthenticatedCustomersRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/expenses': typeof AuthenticatedExpensesRoute
+  '/fleet': typeof AuthenticatedFleetRoute
+  '/follow-ups': typeof AuthenticatedFollowUpsRoute
+  '/invoices': typeof AuthenticatedInvoicesRoute
+  '/leads': typeof AuthenticatedLeadsRoute
+  '/quotations': typeof AuthenticatedQuotationsRoute
+  '/reports': typeof AuthenticatedReportsRoute
+  '/settings': typeof AuthenticatedSettingsRoute
+  '/shipments': typeof AuthenticatedShipmentsRoute
+  '/trips': typeof AuthenticatedTripsRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/bookings': typeof BookingsRoute
-  '/contacts': typeof ContactsRoute
-  '/customers': typeof CustomersRoute
-  '/expenses': typeof ExpensesRoute
-  '/fleet': typeof FleetRoute
-  '/follow-ups': typeof FollowUpsRoute
-  '/invoices': typeof InvoicesRoute
-  '/leads': typeof LeadsRoute
-  '/quotations': typeof QuotationsRoute
-  '/reports': typeof ReportsRoute
-  '/settings': typeof SettingsRoute
-  '/shipments': typeof ShipmentsRoute
-  '/trips': typeof TripsRoute
+  '/bookings': typeof AuthenticatedBookingsRoute
+  '/contacts': typeof AuthenticatedContactsRoute
+  '/customers': typeof AuthenticatedCustomersRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/expenses': typeof AuthenticatedExpensesRoute
+  '/fleet': typeof AuthenticatedFleetRoute
+  '/follow-ups': typeof AuthenticatedFollowUpsRoute
+  '/invoices': typeof AuthenticatedInvoicesRoute
+  '/leads': typeof AuthenticatedLeadsRoute
+  '/quotations': typeof AuthenticatedQuotationsRoute
+  '/reports': typeof AuthenticatedReportsRoute
+  '/settings': typeof AuthenticatedSettingsRoute
+  '/shipments': typeof AuthenticatedShipmentsRoute
+  '/trips': typeof AuthenticatedTripsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/bookings': typeof BookingsRoute
-  '/contacts': typeof ContactsRoute
-  '/customers': typeof CustomersRoute
-  '/expenses': typeof ExpensesRoute
-  '/fleet': typeof FleetRoute
-  '/follow-ups': typeof FollowUpsRoute
-  '/invoices': typeof InvoicesRoute
-  '/leads': typeof LeadsRoute
-  '/quotations': typeof QuotationsRoute
-  '/reports': typeof ReportsRoute
-  '/settings': typeof SettingsRoute
-  '/shipments': typeof ShipmentsRoute
-  '/trips': typeof TripsRoute
+  '/_authenticated/bookings': typeof AuthenticatedBookingsRoute
+  '/_authenticated/contacts': typeof AuthenticatedContactsRoute
+  '/_authenticated/customers': typeof AuthenticatedCustomersRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/expenses': typeof AuthenticatedExpensesRoute
+  '/_authenticated/fleet': typeof AuthenticatedFleetRoute
+  '/_authenticated/follow-ups': typeof AuthenticatedFollowUpsRoute
+  '/_authenticated/invoices': typeof AuthenticatedInvoicesRoute
+  '/_authenticated/leads': typeof AuthenticatedLeadsRoute
+  '/_authenticated/quotations': typeof AuthenticatedQuotationsRoute
+  '/_authenticated/reports': typeof AuthenticatedReportsRoute
+  '/_authenticated/settings': typeof AuthenticatedSettingsRoute
+  '/_authenticated/shipments': typeof AuthenticatedShipmentsRoute
+  '/_authenticated/trips': typeof AuthenticatedTripsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
     | '/bookings'
     | '/contacts'
     | '/customers'
+    | '/dashboard'
     | '/expenses'
     | '/fleet'
     | '/follow-ups'
@@ -163,10 +163,10 @@ export interface FileRouteTypes {
     | '/trips'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
     | '/bookings'
     | '/contacts'
     | '/customers'
+    | '/dashboard'
     | '/expenses'
     | '/fleet'
     | '/follow-ups'
@@ -179,157 +179,157 @@ export interface FileRouteTypes {
     | '/trips'
   id:
     | '__root__'
-    | '/'
-    | '/bookings'
-    | '/contacts'
-    | '/customers'
-    | '/expenses'
-    | '/fleet'
-    | '/follow-ups'
-    | '/invoices'
-    | '/leads'
-    | '/quotations'
-    | '/reports'
-    | '/settings'
-    | '/shipments'
-    | '/trips'
+    | '/_authenticated/bookings'
+    | '/_authenticated/contacts'
+    | '/_authenticated/customers'
+    | '/_authenticated/dashboard'
+    | '/_authenticated/expenses'
+    | '/_authenticated/fleet'
+    | '/_authenticated/follow-ups'
+    | '/_authenticated/invoices'
+    | '/_authenticated/leads'
+    | '/_authenticated/quotations'
+    | '/_authenticated/reports'
+    | '/_authenticated/settings'
+    | '/_authenticated/shipments'
+    | '/_authenticated/trips'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  BookingsRoute: typeof BookingsRoute
-  ContactsRoute: typeof ContactsRoute
-  CustomersRoute: typeof CustomersRoute
-  ExpensesRoute: typeof ExpensesRoute
-  FleetRoute: typeof FleetRoute
-  FollowUpsRoute: typeof FollowUpsRoute
-  InvoicesRoute: typeof InvoicesRoute
-  LeadsRoute: typeof LeadsRoute
-  QuotationsRoute: typeof QuotationsRoute
-  ReportsRoute: typeof ReportsRoute
-  SettingsRoute: typeof SettingsRoute
-  ShipmentsRoute: typeof ShipmentsRoute
-  TripsRoute: typeof TripsRoute
+  AuthenticatedBookingsRoute: typeof AuthenticatedBookingsRoute
+  AuthenticatedContactsRoute: typeof AuthenticatedContactsRoute
+  AuthenticatedCustomersRoute: typeof AuthenticatedCustomersRoute
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedExpensesRoute: typeof AuthenticatedExpensesRoute
+  AuthenticatedFleetRoute: typeof AuthenticatedFleetRoute
+  AuthenticatedFollowUpsRoute: typeof AuthenticatedFollowUpsRoute
+  AuthenticatedInvoicesRoute: typeof AuthenticatedInvoicesRoute
+  AuthenticatedLeadsRoute: typeof AuthenticatedLeadsRoute
+  AuthenticatedQuotationsRoute: typeof AuthenticatedQuotationsRoute
+  AuthenticatedReportsRoute: typeof AuthenticatedReportsRoute
+  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
+  AuthenticatedShipmentsRoute: typeof AuthenticatedShipmentsRoute
+  AuthenticatedTripsRoute: typeof AuthenticatedTripsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/bookings': {
-      id: '/bookings'
+    '/_authenticated/bookings': {
+      id: '/_authenticated/bookings'
       path: '/bookings'
       fullPath: '/bookings'
-      preLoaderRoute: typeof BookingsRouteImport
+      preLoaderRoute: typeof AuthenticatedBookingsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/contacts': {
-      id: '/contacts'
+    '/_authenticated/contacts': {
+      id: '/_authenticated/contacts'
       path: '/contacts'
       fullPath: '/contacts'
-      preLoaderRoute: typeof ContactsRouteImport
+      preLoaderRoute: typeof AuthenticatedContactsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/customers': {
-      id: '/customers'
+    '/_authenticated/customers': {
+      id: '/_authenticated/customers'
       path: '/customers'
       fullPath: '/customers'
-      preLoaderRoute: typeof CustomersRouteImport
+      preLoaderRoute: typeof AuthenticatedCustomersRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/expenses': {
-      id: '/expenses'
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/expenses': {
+      id: '/_authenticated/expenses'
       path: '/expenses'
       fullPath: '/expenses'
-      preLoaderRoute: typeof ExpensesRouteImport
+      preLoaderRoute: typeof AuthenticatedExpensesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/fleet': {
-      id: '/fleet'
+    '/_authenticated/fleet': {
+      id: '/_authenticated/fleet'
       path: '/fleet'
       fullPath: '/fleet'
-      preLoaderRoute: typeof FleetRouteImport
+      preLoaderRoute: typeof AuthenticatedFleetRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/follow-ups': {
-      id: '/follow-ups'
+    '/_authenticated/follow-ups': {
+      id: '/_authenticated/follow-ups'
       path: '/follow-ups'
       fullPath: '/follow-ups'
-      preLoaderRoute: typeof FollowUpsRouteImport
+      preLoaderRoute: typeof AuthenticatedFollowUpsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/invoices': {
-      id: '/invoices'
+    '/_authenticated/invoices': {
+      id: '/_authenticated/invoices'
       path: '/invoices'
       fullPath: '/invoices'
-      preLoaderRoute: typeof InvoicesRouteImport
+      preLoaderRoute: typeof AuthenticatedInvoicesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/leads': {
-      id: '/leads'
+    '/_authenticated/leads': {
+      id: '/_authenticated/leads'
       path: '/leads'
       fullPath: '/leads'
-      preLoaderRoute: typeof LeadsRouteImport
+      preLoaderRoute: typeof AuthenticatedLeadsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/quotations': {
-      id: '/quotations'
+    '/_authenticated/quotations': {
+      id: '/_authenticated/quotations'
       path: '/quotations'
       fullPath: '/quotations'
-      preLoaderRoute: typeof QuotationsRouteImport
+      preLoaderRoute: typeof AuthenticatedQuotationsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/reports': {
-      id: '/reports'
+    '/_authenticated/reports': {
+      id: '/_authenticated/reports'
       path: '/reports'
       fullPath: '/reports'
-      preLoaderRoute: typeof ReportsRouteImport
+      preLoaderRoute: typeof AuthenticatedReportsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/settings': {
-      id: '/settings'
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
       path: '/settings'
       fullPath: '/settings'
-      preLoaderRoute: typeof SettingsRouteImport
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/shipments': {
-      id: '/shipments'
+    '/_authenticated/shipments': {
+      id: '/_authenticated/shipments'
       path: '/shipments'
       fullPath: '/shipments'
-      preLoaderRoute: typeof ShipmentsRouteImport
+      preLoaderRoute: typeof AuthenticatedShipmentsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/trips': {
-      id: '/trips'
+    '/_authenticated/trips': {
+      id: '/_authenticated/trips'
       path: '/trips'
       fullPath: '/trips'
-      preLoaderRoute: typeof TripsRouteImport
+      preLoaderRoute: typeof AuthenticatedTripsRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  BookingsRoute: BookingsRoute,
-  ContactsRoute: ContactsRoute,
-  CustomersRoute: CustomersRoute,
-  ExpensesRoute: ExpensesRoute,
-  FleetRoute: FleetRoute,
-  FollowUpsRoute: FollowUpsRoute,
-  InvoicesRoute: InvoicesRoute,
-  LeadsRoute: LeadsRoute,
-  QuotationsRoute: QuotationsRoute,
-  ReportsRoute: ReportsRoute,
-  SettingsRoute: SettingsRoute,
-  ShipmentsRoute: ShipmentsRoute,
-  TripsRoute: TripsRoute,
+  AuthenticatedBookingsRoute: AuthenticatedBookingsRoute,
+  AuthenticatedContactsRoute: AuthenticatedContactsRoute,
+  AuthenticatedCustomersRoute: AuthenticatedCustomersRoute,
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedExpensesRoute: AuthenticatedExpensesRoute,
+  AuthenticatedFleetRoute: AuthenticatedFleetRoute,
+  AuthenticatedFollowUpsRoute: AuthenticatedFollowUpsRoute,
+  AuthenticatedInvoicesRoute: AuthenticatedInvoicesRoute,
+  AuthenticatedLeadsRoute: AuthenticatedLeadsRoute,
+  AuthenticatedQuotationsRoute: AuthenticatedQuotationsRoute,
+  AuthenticatedReportsRoute: AuthenticatedReportsRoute,
+  AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
+  AuthenticatedShipmentsRoute: AuthenticatedShipmentsRoute,
+  AuthenticatedTripsRoute: AuthenticatedTripsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
