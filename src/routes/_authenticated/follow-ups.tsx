@@ -4,7 +4,7 @@ import { followups, inr } from "@/lib/data";
 
 void StatusBadge; void inr;
 
-export const Route = createFileRoute("/follow-ups")({
+export const Route = createFileRoute("/_authenticated/follow-ups")({
   head: () => ({
     meta: [
       { title: "Follow-ups — Haulwise Logistics CRM" },

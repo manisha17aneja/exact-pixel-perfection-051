@@ -3,7 +3,7 @@ import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YA
 import { Card, PageHeader, Stat, StatusBadge } from "@/components/kit";
 import { invoices, revenueTrend, shipments, vehicles, inr } from "@/lib/data";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
     meta: [
       { title: "Dashboard — Haulwise Logistics CRM" },

@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { DataTable, PageHeader, Stat, StatusBadge } from "@/components/kit";
 import { invoices, inr } from "@/lib/data";
 
-export const Route = createFileRoute("/invoices")({
+export const Route = createFileRoute("/_authenticated/invoices")({
   head: () => ({
     meta: [
       { title: "Invoices — Haulwise Logistics CRM" },

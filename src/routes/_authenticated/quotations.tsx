@@ -4,7 +4,7 @@ import { quotations, inr } from "@/lib/data";
 
 void StatusBadge; void inr;
 
-export const Route = createFileRoute("/quotations")({
+export const Route = createFileRoute("/_authenticated/quotations")({
   head: () => ({
     meta: [
       { title: "Quotations — Haulwise Logistics CRM" },

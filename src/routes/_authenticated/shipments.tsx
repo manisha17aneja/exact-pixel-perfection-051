@@ -3,7 +3,7 @@ import { useState } from "react";
 import { DataTable, Drawer, Field, PageHeader, Stat, StatusBadge } from "@/components/kit";
 import { shipments } from "@/lib/data";
 
-export const Route = createFileRoute("/shipments")({
+export const Route = createFileRoute("/_authenticated/shipments")({
   head: () => ({
     meta: [
       { title: "Shipments — Haulwise Logistics CRM" },

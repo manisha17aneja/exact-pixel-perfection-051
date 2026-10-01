@@ -3,7 +3,7 @@ import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxi
 import { Card, PageHeader, Stat } from "@/components/kit";
 import { customers, expenses, revenueTrend, inr } from "@/lib/data";
 
-export const Route = createFileRoute("/reports")({
+export const Route = createFileRoute("/_authenticated/reports")({
   head: () => ({
     meta: [
       { title: "Reports — Haulwise Logistics CRM" },

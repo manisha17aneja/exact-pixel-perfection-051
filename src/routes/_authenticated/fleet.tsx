@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { DataTable, PageHeader, StatusBadge } from "@/components/kit";
 import { vehicles } from "@/lib/data";
 
-export const Route = createFileRoute("/fleet")({
+export const Route = createFileRoute("/_authenticated/fleet")({
   head: () => ({
     meta: [
       { title: "Fleet — Haulwise Logistics CRM" },
