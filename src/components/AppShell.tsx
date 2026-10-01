@@ -5,14 +5,14 @@ import {
   CalendarCheck, Route as RouteIcon, Wallet, BarChart3, Settings, Bell, Search, Plus, Menu, X,
 } from "lucide-react";
 
-type Item = { label: string; to?: "/" | "/leads" | "/customers" | "/shipments" | "/fleet" | "/invoices"; icon: any };
+type Item = { label: string; to?: "/" | "/leads" | "/customers" | "/shipments" | "/fleet" | "/invoices" | "/contacts" | "/follow-ups" | "/quotations" | "/bookings" | "/trips" | "/expenses" | "/reports" | "/settings"; icon: any };
 const nav: { section: string; items: Item[] }[] = [
   { section: "Overview", items: [{ label: "Dashboard", to: "/", icon: LayoutDashboard }] },
-  { section: "CRM", items: [{ label: "Leads", to: "/leads", icon: Target }, { label: "Customers", to: "/customers", icon: Building2 }, { label: "Contacts", icon: Users }, { label: "Follow-ups", icon: CalendarCheck }] },
-  { section: "Sales", items: [{ label: "Quotations", icon: FileText }, { label: "Bookings", icon: ClipboardList }] },
-  { section: "Operations", items: [{ label: "Shipments", to: "/shipments", icon: Package }, { label: "Fleet", to: "/fleet", icon: Truck }, { label: "Trips & Routes", icon: RouteIcon }] },
-  { section: "Finance", items: [{ label: "Invoices", to: "/invoices", icon: Receipt }, { label: "Expenses", icon: Wallet }] },
-  { section: "Insights", items: [{ label: "Reports", icon: BarChart3 }, { label: "Settings", icon: Settings }] },
+  { section: "CRM", items: [{ label: "Leads", to: "/leads", icon: Target }, { label: "Customers", to: "/customers", icon: Building2 }, { label: "Contacts", to: "/contacts", icon: Users }, { label: "Follow-ups", to: "/follow-ups", icon: CalendarCheck }] },
+  { section: "Sales", items: [{ label: "Quotations", to: "/quotations", icon: FileText }, { label: "Bookings", to: "/bookings", icon: ClipboardList }] },
+  { section: "Operations", items: [{ label: "Shipments", to: "/shipments", icon: Package }, { label: "Fleet", to: "/fleet", icon: Truck }, { label: "Trips & Routes", to: "/trips", icon: RouteIcon }] },
+  { section: "Finance", items: [{ label: "Invoices", to: "/invoices", icon: Receipt }, { label: "Expenses", to: "/expenses", icon: Wallet }] },
+  { section: "Insights", items: [{ label: "Reports", to: "/reports", icon: BarChart3 }, { label: "Settings", to: "/settings", icon: Settings }] },
 ];
 
 function SidebarBody({ onNav }: { onNav?: () => void }) {
