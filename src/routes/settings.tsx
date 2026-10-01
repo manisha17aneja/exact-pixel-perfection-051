@@ -15,7 +15,7 @@ export const Route = createFileRoute("/settings")({
   component: SettingsPage,
 });
 
-const perms = [
+const perms: [string, string][] = [
   ["Admin", "Everything, including billing and users"],
   ["Manager", "CRM, sales, operations and reports"],
   ["Dispatcher", "Shipments, fleet and trips"],
