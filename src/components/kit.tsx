@@ -42,10 +42,10 @@ export function Stat({ label, value, delta, tone = "success" }: { label: string;
 export type Col<T> = { key: string; label: string; render: (r: T) => ReactNode; className?: string };
 
 export function DataTable<T extends Record<string, any>>({
-  rows, cols, idKey, filterKey, filters, onRow, addLabel, onAdd,
+  rows, cols, idKey, filterKey, filters, onRow, addLabel, onAdd, onBulkDelete,
 }: {
-  rows: T[]; cols: Col<T>[]; idKey: keyof T; filterKey?: keyof T; filters?: string[];
-  onRow?: (r: T) => void; addLabel?: string; onAdd?: () => void;
+  rows: T[]; cols: Col<T>[]; idKey: keyof T | string; filterKey?: keyof T; filters?: string[];
+  onRow?: (r: T) => void; addLabel?: string; onAdd?: () => void; onBulkDelete?: (ids: string[]) => void;
 }) {
   const [q, setQ] = useState("");
   const [f, setF] = useState("All");
@@ -86,6 +86,7 @@ export function DataTable<T extends Record<string, any>>({
         )}
         <div className="ml-auto flex gap-2">
           {sel.size > 0 && <span className="self-center text-xs text-muted-foreground">{sel.size} selected</span>}
+          {sel.size > 0 && onBulkDelete && <button onClick={() => { onBulkDelete([...sel]); setSel(new Set()); }} className="btn btn-outline text-danger">Delete</button>}
           <button onClick={exportCsv} className="btn btn-outline"><Download className="h-4 w-4" /><span className="hidden sm:inline">Export</span></button>
           {addLabel && <button onClick={onAdd} className="btn btn-primary"><Plus className="h-4 w-4" />{addLabel}</button>}
         </div>
