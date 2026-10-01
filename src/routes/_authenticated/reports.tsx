@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { Card, PageHeader, Stat } from "@/components/kit";
-import { customers, expenses, revenueTrend, inr } from "@/lib/data";
+import { revenueTrend, inr } from "@/lib/data";
+import { useRows } from "@/lib/db";
 
-export const Route = createFileRoute("/reports")({
+export const Route = createFileRoute("/_authenticated/reports")({
   head: () => ({
     meta: [
       { title: "Reports — Haulwise Logistics CRM" },
@@ -16,9 +17,11 @@ export const Route = createFileRoute("/reports")({
 });
 
 function ReportsPage() {
-  const top = [...customers].sort((a, b) => b.revenue - a.revenue).slice(0, 5);
-  const max = top[0]?.revenue ?? 1;
-  const cats = Object.entries(expenses.reduce<Record<string, number>>((a, e) => ((a[e.category] = (a[e.category] ?? 0) + e.amount), a), {}));
+  const { data: customers = [] } = useRows("customers");
+  const { data: expenses = [] } = useRows("expenses");
+  const top = [...customers].sort((a, b) => Number(b.revenue) - Number(a.revenue)).slice(0, 5);
+  const max = Number(top[0]?.revenue ?? 1) || 1;
+  const cats = Object.entries(expenses.reduce<Record<string, number>>((a, e) => ((a[e.category] = (a[e.category] ?? 0) + Number(e.amount)), a), {}));
   return (
     <>
       <PageHeader crumb="Insights / Reports" title="Reports" desc="How the business performed over the last six months." />
@@ -48,15 +51,15 @@ function ReportsPage() {
           <div className="mt-4 space-y-3">
             {top.map((c) => (
               <div key={c.id}>
-                <div className="mb-1 flex justify-between text-sm"><span>{c.name}</span><span className="tabular-nums">{inr(c.revenue)}</span></div>
-                <div className="h-1.5 rounded bg-muted"><div className="h-full rounded bg-primary" style={{ width: `${(c.revenue / max) * 100}%` }} /></div>
+                <div className="mb-1 flex justify-between text-sm"><span>{c.name}</span><span className="tabular-nums">{inr(Number(c.revenue))}</span></div>
+                <div className="h-1.5 rounded bg-muted"><div className="h-full rounded bg-primary" style={{ width: `${(Number(c.revenue) / max) * 100}%` }} /></div>
               </div>
             ))}
           </div>
         </Card>
       </div>
       <Card className="mt-4 p-4">
-        <p className="mb-3 text-sm font-medium">Expense breakdown (this week)</p>
+        <p className="mb-3 text-sm font-medium">Expense breakdown</p>
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-5">
           {cats.map(([k, v]) => (
             <div key={k} className="rounded-md border bg-muted/40 p-3">

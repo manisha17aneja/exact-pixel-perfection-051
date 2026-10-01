@@ -1,13 +1,15 @@
-import { Link, useRouterState } from "@tanstack/react-router";
-import { useState, type ReactNode } from "react";
+import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
+import { useQueryClient } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { useEffect, useState, type ReactNode } from "react";
 import {
   LayoutDashboard, Target, Building2, Package, Truck, Receipt, Users, FileText, ClipboardList,
-  CalendarCheck, Route as RouteIcon, Wallet, BarChart3, Settings, Bell, Search, Plus, Menu, X,
+  CalendarCheck, Route as RouteIcon, Wallet, BarChart3, Settings, Bell, Search, Plus, Menu, X, LogOut,
 } from "lucide-react";
 
-type Item = { label: string; to?: "/" | "/leads" | "/customers" | "/shipments" | "/fleet" | "/invoices" | "/contacts" | "/follow-ups" | "/quotations" | "/bookings" | "/trips" | "/expenses" | "/reports" | "/settings"; icon: any };
+type Item = { label: string; to?: "/dashboard" | "/leads" | "/customers" | "/shipments" | "/fleet" | "/invoices" | "/contacts" | "/follow-ups" | "/quotations" | "/bookings" | "/trips" | "/expenses" | "/reports" | "/settings"; icon: any };
 const nav: { section: string; items: Item[] }[] = [
-  { section: "Overview", items: [{ label: "Dashboard", to: "/", icon: LayoutDashboard }] },
+  { section: "Overview", items: [{ label: "Dashboard", to: "/dashboard", icon: LayoutDashboard }] },
   { section: "CRM", items: [{ label: "Leads", to: "/leads", icon: Target }, { label: "Customers", to: "/customers", icon: Building2 }, { label: "Contacts", to: "/contacts", icon: Users }, { label: "Follow-ups", to: "/follow-ups", icon: CalendarCheck }] },
   { section: "Sales", items: [{ label: "Quotations", to: "/quotations", icon: FileText }, { label: "Bookings", to: "/bookings", icon: ClipboardList }] },
   { section: "Operations", items: [{ label: "Shipments", to: "/shipments", icon: Package }, { label: "Fleet", to: "/fleet", icon: Truck }, { label: "Trips & Routes", to: "/trips", icon: RouteIcon }] },
@@ -48,6 +50,16 @@ function SidebarBody({ onNav }: { onNav?: () => void }) {
 export function AppShell({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const [quick, setQuick] = useState(false);
+  const [menu, setMenu] = useState(false);
+  const navigate = useNavigate();
+  const qc = useQueryClient();
+  const [email, setEmail] = useState("");
+  useEffect(() => { supabase.auth.getUser().then(({ data }) => setEmail(data.user?.email ?? "")); }, []);
+  const signOut = async () => {
+    await qc.cancelQueries(); qc.clear();
+    await supabase.auth.signOut();
+    navigate({ to: "/auth", replace: true });
+  };
   return (
     <div className="flex min-h-screen w-full">
       <aside className="sticky top-0 hidden h-screen w-60 shrink-0 flex-col border-r border-sidebar-border bg-sidebar lg:flex"><SidebarBody /></aside>
@@ -72,14 +84,23 @@ export function AppShell({ children }: { children: ReactNode }) {
               <button onClick={() => setQuick(!quick)} className="btn btn-primary"><Plus className="h-4 w-4" /><span className="hidden sm:inline">New</span></button>
               {quick && (
                 <div className="surface absolute right-0 mt-2 w-44 p-1 text-sm">
-                  {["Lead", "Quotation", "Booking", "Shipment", "Invoice"].map((x) => (
-                    <button key={x} onClick={() => setQuick(false)} className="w-full rounded px-3 py-2 text-left hover:bg-muted">New {x}</button>
+                  {([["Lead", "/leads"], ["Quotation", "/quotations"], ["Booking", "/bookings"], ["Shipment", "/shipments"], ["Invoice", "/invoices"]] as const).map(([x, to]) => (
+                    <Link key={x} to={to} onClick={() => setQuick(false)} className="block w-full rounded px-3 py-2 text-left hover:bg-muted">New {x}</Link>
                   ))}
                 </div>
               )}
             </div>
             <button className="btn btn-ghost relative h-8 w-8 p-0"><Bell className="h-4 w-4" /><span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-danger" /></button>
-            <div className="grid h-8 w-8 place-items-center rounded-full bg-accent text-xs font-semibold text-accent-foreground">MA</div>
+            <div className="relative">
+              <button onClick={() => setMenu(!menu)} className="grid h-8 w-8 place-items-center rounded-full bg-accent text-xs font-semibold uppercase text-accent-foreground">{email.slice(0, 2) || "··"}</button>
+              {menu && (
+                <div className="surface absolute right-0 mt-2 w-56 p-1 text-sm">
+                  <p className="truncate px-3 py-2 text-xs text-muted-foreground">{email}</p>
+                  <Link to="/settings" onClick={() => setMenu(false)} className="block rounded px-3 py-2 hover:bg-muted">Settings</Link>
+                  <button onClick={signOut} className="flex w-full items-center gap-2 rounded px-3 py-2 text-left text-danger hover:bg-muted"><LogOut className="h-4 w-4" />Sign out</button>
+                </div>
+              )}
+            </div>
           </div>
         </header>
         <main className="flex-1 p-4 sm:p-6 lg:p-8">{children}</main>
