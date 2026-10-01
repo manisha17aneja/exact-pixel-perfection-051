@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { DataTable, PageHeader, StatusBadge } from "@/components/kit";
-import { followups, inr } from "@/lib/data";
+import { CrudPage, type FieldDef } from "@/components/CrudPage";
+import { StatusBadge } from "@/components/kit";
+import { inr } from "@/lib/data";
 
-void StatusBadge; void inr;
+void inr; void StatusBadge;
 
 export const Route = createFileRoute("/_authenticated/follow-ups")({
   head: () => ({
@@ -16,20 +17,28 @@ export const Route = createFileRoute("/_authenticated/follow-ups")({
   component: FollowUpsPage,
 });
 
+const STATUSES: string[] = ["Today", "Scheduled", "Done"];
+const fields: FieldDef[] = [
+  { key: "subject", label: "Subject", type: "text", required: true },
+  { key: "with_name", label: "With (customer)", type: "text" },
+  { key: "due", label: "Due", type: "text" },
+  { key: "owner", label: "Owner", type: "text" },
+  { key: "status", label: "Status", type: "select", options: STATUSES },
+];
+
 function FollowUpsPage() {
   return (
-    <>
-      <PageHeader crumb="CRM / Follow-ups" title="Follow-ups" desc="Calls, reminders and meetings owed to customers." />
-      <DataTable
-        rows={followups} idKey="id" filterKey="status" filters={["Today","Scheduled","Done"]}
-        cols={[
-          { key: "subject", label: "Subject", render: (r) => <span className="font-medium">{r.subject}</span> },
-          { key: "with", label: "With", render: (r) => r.with },
-          { key: "due", label: "Due", render: (r) => r.due },
-          { key: "owner", label: "Owner", render: (r) => r.owner },
-          { key: "status", label: "Status", render: (r) => <StatusBadge status={r.status} /> },
-        ]}
-      />
-    </>
+    <CrudPage
+      table="followups" idKey="id" title="Follow-ups" crumb="CRM / Follow-ups" desc="Calls, reminders and meetings owed to customers." addLabel="Add follow-up"
+      statuses={STATUSES}
+      fields={fields}
+      cols={[
+        { key: "subject", label: "Subject", render: (r: any) => <span className="font-medium">{r.subject}</span> },
+        { key: "with_name", label: "With", render: (r: any) => r.with_name },
+        { key: "due", label: "Due", render: (r: any) => r.due },
+        { key: "owner", label: "Owner", render: (r: any) => r.owner },
+        { key: "status", label: "Status", render: (r: any) => <StatusBadge status={r.status} /> },
+      ]}
+    />
   );
 }

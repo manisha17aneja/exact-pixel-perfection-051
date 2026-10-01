@@ -1,31 +1,48 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { DataTable, PageHeader, StatusBadge } from "@/components/kit";
-import { vehicles } from "@/lib/data";
+import { CrudPage, type FieldDef } from "@/components/CrudPage";
+import { StatusBadge } from "@/components/kit";
+import { inr } from "@/lib/data";
+
+void inr; void StatusBadge;
 
 export const Route = createFileRoute("/_authenticated/fleet")({
   head: () => ({
     meta: [
       { title: "Fleet — Haulwise Logistics CRM" },
-      { name: "description", content: "Vehicles, assigned drivers, current location and service schedule." },
+      { name: "description", content: "Your trucks, trailers and reefers at a glance." },
       { property: "og:title", content: "Fleet — Haulwise Logistics CRM" },
-      { property: "og:description", content: "Vehicles, assigned drivers, current location and service schedule." },
+      { property: "og:description", content: "Your trucks, trailers and reefers at a glance." },
     ],
   }),
-  component: () => (
-    <>
-      <PageHeader crumb="Operations / Fleet" title="Fleet" desc="Your trucks, trailers and reefers at a glance." />
-      <DataTable
-        rows={vehicles} idKey="reg" filterKey="status" filters={["Available", "On trip", "Maintenance"]}
-        cols={[
-          { key: "reg", label: "Registration", render: (r) => <span className="font-mono text-xs font-medium">{r.reg}</span> },
-          { key: "type", label: "Type", render: (r) => r.type },
-          { key: "capacity", label: "Capacity", render: (r) => r.capacity },
-          { key: "driver", label: "Driver", render: (r) => r.driver },
-          { key: "location", label: "Last location", render: (r) => r.location },
-          { key: "service", label: "Next service", render: (r) => <span className={r.service === "Due now" ? "text-warning font-medium" : ""}>{r.service}</span> },
-          { key: "status", label: "Status", render: (r) => <StatusBadge status={r.status} /> },
-        ]}
-      />
-    </>
-  ),
+  component: FleetPage,
 });
+
+const STATUSES: string[] = ["Available", "On trip", "Maintenance"];
+const fields: FieldDef[] = [
+  { key: "reg", label: "Registration number", type: "text", required: true },
+  { key: "type", label: "Type", type: "text" },
+  { key: "capacity", label: "Capacity", type: "text" },
+  { key: "driver", label: "Driver", type: "text" },
+  { key: "location", label: "Last location", type: "text" },
+  { key: "service", label: "Next service", type: "text" },
+  { key: "status", label: "Status", type: "select", options: STATUSES },
+];
+
+function FleetPage() {
+  return (
+    <CrudPage
+      table="vehicles" idKey="reg" title="Fleet" crumb="Operations / Fleet" desc="Your trucks, trailers and reefers at a glance." addLabel="Add vehicle"
+      statuses={STATUSES}
+      fields={fields}
+      cols={[
+        { key: "reg", label: "Registration", render: (r: any) => <span className="font-mono text-xs">{r.reg}</span> },
+        { key: "type", label: "Type", render: (r: any) => r.type },
+        { key: "capacity", label: "Capacity", render: (r: any) => r.capacity },
+        { key: "driver", label: "Driver", render: (r: any) => r.driver },
+        { key: "location", label: "Last location", render: (r: any) => r.location },
+        { key: "service", label: "Next service", render: (r: any) => r.service },
+        { key: "status", label: "Status", render: (r: any) => <StatusBadge status={r.status} /> },
+      ]}
+    />
+  );
+}
