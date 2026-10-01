@@ -21,14 +21,14 @@ function SidebarBody({ onNav }: { onNav?: () => void }) {
   const path = useRouterState({ select: (s) => s.location.pathname });
   return (
     <>
-      <div className="flex h-14 items-center gap-2 border-b border-sidebar-border px-4">
-        <div className="grid h-7 w-7 place-items-center rounded-md bg-primary text-primary-foreground"><Truck className="h-4 w-4" /></div>
-        <span className="font-display font-semibold tracking-tight">Haulwise</span>
+      <div className="flex h-16 items-center gap-2.5 px-5">
+        <div className="grid h-8 w-8 place-items-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground"><Truck className="h-4 w-4" /></div>
+        <span className="font-display text-lg font-bold tracking-tight text-sidebar-accent-foreground">Haulwise</span>
       </div>
-      <nav className="flex-1 space-y-5 overflow-y-auto p-3">
+      <nav className="flex-1 space-y-6 overflow-y-auto px-3 py-4">
         {nav.map((g) => (
           <div key={g.section}>
-            <p className="px-2 pb-1.5 text-[11px] font-medium uppercase tracking-wider text-muted-foreground">{g.section}</p>
+            <p className="px-2 pb-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-sidebar-muted">{g.section}</p>
             {g.items.map((i) =>
               i.to ? (
                 <Link key={i.label} to={i.to} onClick={onNav} className={`nav-item ${path === i.to ? "nav-item-active" : ""}`}>
@@ -62,7 +62,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   };
   return (
     <div className="flex min-h-screen w-full">
-      <aside className="sticky top-0 hidden h-screen w-60 shrink-0 flex-col border-r border-sidebar-border bg-sidebar lg:flex"><SidebarBody /></aside>
+      <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col bg-sidebar lg:flex"><SidebarBody /></aside>
       {open && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div className="absolute inset-0 bg-foreground/20" onClick={() => setOpen(false)} />
@@ -73,17 +73,17 @@ export function AppShell({ children }: { children: ReactNode }) {
         </div>
       )}
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="sticky top-0 z-40 flex h-14 items-center gap-3 border-b bg-background/90 px-4 backdrop-blur">
+        <header className="sticky top-0 z-40 flex h-16 items-center gap-3 border-b bg-background/70 px-4 backdrop-blur-xl sm:px-6">
           <button onClick={() => setOpen(true)} className="btn btn-ghost h-8 w-8 p-0 lg:hidden"><Menu className="h-4 w-4" /></button>
           <div className="relative min-w-0 flex-1 max-w-md">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <input placeholder="Search shipments, customers, invoices…" className="field w-full pl-8" />
+            <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+            <input placeholder="Search shipments, customers, invoices…" className="field w-full rounded-full pl-9" />
           </div>
           <div className="ml-auto flex shrink-0 items-center gap-2">
             <div className="relative">
               <button onClick={() => setQuick(!quick)} className="btn btn-primary"><Plus className="h-4 w-4" /><span className="hidden sm:inline">New</span></button>
               {quick && (
-                <div className="surface absolute right-0 mt-2 w-44 p-1 text-sm">
+                <div className="surface absolute right-0 z-50 mt-2 w-44 p-1 text-sm">
                   {([["Lead", "/leads"], ["Quotation", "/quotations"], ["Booking", "/bookings"], ["Shipment", "/shipments"], ["Invoice", "/invoices"]] as const).map(([x, to]) => (
                     <Link key={x} to={to} onClick={() => setQuick(false)} className="block w-full rounded px-3 py-2 text-left hover:bg-muted">New {x}</Link>
                   ))}
@@ -92,9 +92,9 @@ export function AppShell({ children }: { children: ReactNode }) {
             </div>
             <button className="btn btn-ghost relative h-8 w-8 p-0"><Bell className="h-4 w-4" /><span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-danger" /></button>
             <div className="relative">
-              <button onClick={() => setMenu(!menu)} className="grid h-8 w-8 place-items-center rounded-full bg-accent text-xs font-semibold uppercase text-accent-foreground">{email.slice(0, 2) || "··"}</button>
+              <button onClick={() => setMenu(!menu)} className="grid h-8 w-8 place-items-center rounded-full bg-lime text-xs font-bold uppercase text-lime-foreground ring-2 ring-background">{email.slice(0, 2) || "··"}</button>
               {menu && (
-                <div className="surface absolute right-0 mt-2 w-56 p-1 text-sm">
+                <div className="surface absolute right-0 z-50 mt-2 w-56 p-1 text-sm">
                   <p className="truncate px-3 py-2 text-xs text-muted-foreground">{email}</p>
                   <Link to="/settings" onClick={() => setMenu(false)} className="block rounded px-3 py-2 hover:bg-muted">Settings</Link>
                   <button onClick={signOut} className="flex w-full items-center gap-2 rounded px-3 py-2 text-left text-danger hover:bg-muted"><LogOut className="h-4 w-4" />Sign out</button>
