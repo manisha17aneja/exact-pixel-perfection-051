@@ -14,16 +14,436 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bookings: {
+        Row: {
+          created_at: string
+          customer: string
+          id: string
+          lane: string
+          material: string
+          pickup: string
+          status: string
+          weight: string
+        }
+        Insert: {
+          created_at?: string
+          customer: string
+          id?: string
+          lane?: string
+          material?: string
+          pickup?: string
+          status?: string
+          weight?: string
+        }
+        Update: {
+          created_at?: string
+          customer?: string
+          id?: string
+          lane?: string
+          material?: string
+          pickup?: string
+          status?: string
+          weight?: string
+        }
+        Relationships: []
+      }
+      contacts: {
+        Row: {
+          company: string
+          created_at: string
+          email: string
+          id: string
+          name: string
+          phone: string
+          role: string
+        }
+        Insert: {
+          company?: string
+          created_at?: string
+          email?: string
+          id?: string
+          name: string
+          phone?: string
+          role?: string
+        }
+        Update: {
+          company?: string
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+          phone?: string
+          role?: string
+        }
+        Relationships: []
+      }
+      customers: {
+        Row: {
+          city: string
+          contact: string
+          created_at: string
+          id: string
+          name: string
+          outstanding: number
+          revenue: number
+          shipments: number
+          status: string
+        }
+        Insert: {
+          city?: string
+          contact?: string
+          created_at?: string
+          id?: string
+          name: string
+          outstanding?: number
+          revenue?: number
+          shipments?: number
+          status?: string
+        }
+        Update: {
+          city?: string
+          contact?: string
+          created_at?: string
+          id?: string
+          name?: string
+          outstanding?: number
+          revenue?: number
+          shipments?: number
+          status?: string
+        }
+        Relationships: []
+      }
+      expenses: {
+        Row: {
+          amount: number
+          category: string
+          created_at: string
+          date: string
+          id: string
+          status: string
+          trip: string
+          vendor: string
+        }
+        Insert: {
+          amount?: number
+          category: string
+          created_at?: string
+          date?: string
+          id?: string
+          status?: string
+          trip?: string
+          vendor?: string
+        }
+        Update: {
+          amount?: number
+          category?: string
+          created_at?: string
+          date?: string
+          id?: string
+          status?: string
+          trip?: string
+          vendor?: string
+        }
+        Relationships: []
+      }
+      followups: {
+        Row: {
+          created_at: string
+          due: string
+          id: string
+          owner: string
+          status: string
+          subject: string
+          with_name: string
+        }
+        Insert: {
+          created_at?: string
+          due?: string
+          id?: string
+          owner?: string
+          status?: string
+          subject: string
+          with_name?: string
+        }
+        Update: {
+          created_at?: string
+          due?: string
+          id?: string
+          owner?: string
+          status?: string
+          subject?: string
+          with_name?: string
+        }
+        Relationships: []
+      }
+      invoices: {
+        Row: {
+          amount: number
+          created_at: string
+          customer: string
+          due: string
+          id: string
+          issued: string
+          shipment: string
+          status: string
+        }
+        Insert: {
+          amount?: number
+          created_at?: string
+          customer: string
+          due?: string
+          id?: string
+          issued?: string
+          shipment?: string
+          status?: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          customer?: string
+          due?: string
+          id?: string
+          issued?: string
+          shipment?: string
+          status?: string
+        }
+        Relationships: []
+      }
+      leads: {
+        Row: {
+          company: string
+          created_at: string
+          id: string
+          name: string
+          owner: string
+          route: string
+          source: string
+          status: string
+          value: number
+        }
+        Insert: {
+          company?: string
+          created_at?: string
+          id?: string
+          name: string
+          owner?: string
+          route?: string
+          source?: string
+          status?: string
+          value?: number
+        }
+        Update: {
+          company?: string
+          created_at?: string
+          id?: string
+          name?: string
+          owner?: string
+          route?: string
+          source?: string
+          status?: string
+          value?: number
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string
+          id: string
+          name?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      quotations: {
+        Row: {
+          amount: number
+          created_at: string
+          customer: string
+          id: string
+          lane: string
+          status: string
+          valid: string
+          vehicle: string
+        }
+        Insert: {
+          amount?: number
+          created_at?: string
+          customer: string
+          id?: string
+          lane?: string
+          status?: string
+          valid?: string
+          vehicle?: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          customer?: string
+          id?: string
+          lane?: string
+          status?: string
+          valid?: string
+          vehicle?: string
+        }
+        Relationships: []
+      }
+      shipments: {
+        Row: {
+          created_at: string
+          customer: string
+          dest: string
+          driver: string
+          eta: string
+          id: string
+          origin: string
+          progress: number
+          status: string
+          vehicle: string
+          weight: string
+        }
+        Insert: {
+          created_at?: string
+          customer: string
+          dest?: string
+          driver?: string
+          eta?: string
+          id?: string
+          origin?: string
+          progress?: number
+          status?: string
+          vehicle?: string
+          weight?: string
+        }
+        Update: {
+          created_at?: string
+          customer?: string
+          dest?: string
+          driver?: string
+          eta?: string
+          id?: string
+          origin?: string
+          progress?: number
+          status?: string
+          vehicle?: string
+          weight?: string
+        }
+        Relationships: []
+      }
+      trips: {
+        Row: {
+          created_at: string
+          driver: string
+          fuel: number
+          id: string
+          km: number
+          route: string
+          start: string
+          status: string
+          vehicle: string
+        }
+        Insert: {
+          created_at?: string
+          driver?: string
+          fuel?: number
+          id?: string
+          km?: number
+          route: string
+          start?: string
+          status?: string
+          vehicle?: string
+        }
+        Update: {
+          created_at?: string
+          driver?: string
+          fuel?: number
+          id?: string
+          km?: number
+          route?: string
+          start?: string
+          status?: string
+          vehicle?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      vehicles: {
+        Row: {
+          capacity: string
+          created_at: string
+          driver: string
+          location: string
+          reg: string
+          service: string
+          status: string
+          type: string
+        }
+        Insert: {
+          capacity?: string
+          created_at?: string
+          driver?: string
+          location?: string
+          reg: string
+          service?: string
+          status?: string
+          type?: string
+        }
+        Update: {
+          capacity?: string
+          created_at?: string
+          driver?: string
+          location?: string
+          reg?: string
+          service?: string
+          status?: string
+          type?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      gen_code: { Args: { prefix: string }; Returns: string }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "manager" | "dispatcher" | "accountant"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +570,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "manager", "dispatcher", "accountant"],
+    },
   },
 } as const
