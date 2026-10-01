@@ -64,7 +64,7 @@ export function DataTable<T extends Record<string, any>>({
     const n = new Set(sel); n.has(id) ? n.delete(id) : n.add(id); setSel(n);
   };
   const exportCsv = () => {
-    const csv = [Object.keys(rows[0]).join(","), ...filtered.map((r) => Object.values(r).join(","))].join("\n");
+    const csv = [Object.keys(rows[0] ?? {}).join(","), ...filtered.map((r) => Object.values(r).join(","))].join("\n");
     const a = document.createElement("a");
     a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
     a.download = "export.csv"; a.click();
