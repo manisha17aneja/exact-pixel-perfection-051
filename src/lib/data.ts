@@ -62,3 +62,54 @@ export const revenueTrend = [
 
 export const inr = (n: number) =>
   "₹" + (n >= 100000 ? (n / 100000).toFixed(n >= 1000000 ? 1 : 2) + " L" : n.toLocaleString("en-IN"));
+
+Object.assign(statusTone, { Sent: "info", Accepted: "success", Rejected: "danger", Confirmed: "success", Cancelled: "danger", Scheduled: "info", Done: "success", Today: "warning", Planned: "neutral", Completed: "success", Approved: "success", Submitted: "warning", Admin: "info", Manager: "neutral", Dispatcher: "neutral", Accountant: "neutral" });
+
+export const contacts = [
+  { id: "CT-501", name: "Priya Nair", role: "Logistics Head", company: "Coastline Pharma", phone: "+91 98470 11223", email: "priya@coastline.in" },
+  { id: "CT-502", name: "Sandeep Gill", role: "Owner", company: "Gill Steel Works", phone: "+91 98150 44567", email: "sandeep@gillsteel.com" },
+  { id: "CT-503", name: "Kavita Joshi", role: "Supply Chain Mgr", company: "FreshFarm Foods", phone: "+91 98220 77881", email: "kavita@freshfarm.in" },
+  { id: "CT-504", name: "Mohan Das", role: "Procurement", company: "Bharat Cement Ltd.", phone: "+91 94252 33190", email: "mohan@bharatcement.com" },
+  { id: "CT-505", name: "Farah Khan", role: "Ops Manager", company: "Urban Retail Co.", phone: "+91 98110 55602", email: "farah@urbanretail.in" },
+];
+export const followups = [
+  { id: "FU-81", subject: "Rate revision call", with: "Gill Steel Works", due: "Today, 15:00", owner: "Ankit S.", status: "Today" },
+  { id: "FU-80", subject: "Send reefer quote", with: "FreshFarm Foods", due: "Oct 3", owner: "Vikas T.", status: "Scheduled" },
+  { id: "FU-79", subject: "Payment reminder INV-3390", with: "Coastline Pharma", due: "Today, 11:00", owner: "Neha R.", status: "Today" },
+  { id: "FU-78", subject: "Contract renewal meeting", with: "Bharat Cement Ltd.", due: "Oct 7", owner: "Manisha A.", status: "Scheduled" },
+  { id: "FU-77", subject: "Feedback after delivery", with: "Urban Retail Co.", due: "Oct 1", owner: "Vikas T.", status: "Done" },
+];
+export const quotations = [
+  { id: "QT-2207", customer: "Gill Steel Works", lane: "Jamshedpur → Pune", vehicle: "32 ft MXL", amount: 148000, valid: "Oct 10", status: "Sent" },
+  { id: "QT-2206", customer: "FreshFarm Foods", lane: "Nashik → Kolkata", vehicle: "Reefer 32 ft", amount: 212000, valid: "Oct 8", status: "Draft" },
+  { id: "QT-2205", customer: "Coastline Pharma", lane: "Kochi → Delhi", vehicle: "Reefer 24 ft", amount: 186000, valid: "Oct 5", status: "Accepted" },
+  { id: "QT-2204", customer: "Deccan Textiles", lane: "Surat → Chennai", vehicle: "32 ft MXL", amount: 132000, valid: "Sep 30", status: "Rejected" },
+  { id: "QT-2203", customer: "Bharat Cement Ltd.", lane: "Raipur → Hyderabad", vehicle: "Trailer 40 ft", amount: 165000, valid: "Oct 12", status: "Accepted" },
+];
+export const bookings = [
+  { id: "BK-9031", customer: "Bharat Cement Ltd.", lane: "Raipur → Hyderabad", pickup: "Oct 4, 08:00", material: "Cement bags", weight: "28 t", status: "Confirmed" },
+  { id: "BK-9030", customer: "FreshFarm Foods", lane: "Nashik → Kolkata", pickup: "Oct 2, 06:00", material: "Grapes (chilled)", weight: "12 t", status: "Confirmed" },
+  { id: "BK-9029", customer: "Coastline Pharma", lane: "Kochi → Delhi", pickup: "Sep 30, 10:00", material: "Medicines", weight: "8 t", status: "Completed" },
+  { id: "BK-9028", customer: "Urban Retail Co.", lane: "Delhi → Lucknow", pickup: "Oct 6, 09:00", material: "Apparel cartons", weight: "5 t", status: "Pending" },
+  { id: "BK-9027", customer: "Deccan Textiles", lane: "Surat → Chennai", pickup: "Sep 28, 07:00", material: "Fabric rolls", weight: "18 t", status: "Cancelled" },
+];
+export const trips = [
+  { id: "TR-4412", route: "Jamshedpur → Pune", km: 1640, vehicle: "MH12 AB 4521", driver: "Ramesh Yadav", start: "Sep 30", fuel: 52000, status: "In transit" },
+  { id: "TR-4411", route: "Kochi → Delhi", km: 2690, vehicle: "KL07 CD 9910", driver: "Suresh Pillai", start: "Oct 1", fuel: 86000, status: "In transit" },
+  { id: "TR-4410", route: "Raipur → Nagpur", km: 290, vehicle: "CG04 EF 3302", driver: "Ajay Verma", start: "Oct 1", fuel: 11000, status: "Delayed" },
+  { id: "TR-4409", route: "Delhi → Jaipur", km: 280, vehicle: "DL01 JK 1204", driver: "Manoj Kumar", start: "Oct 1", fuel: 8200, status: "Completed" },
+  { id: "TR-4408", route: "Raipur → Hyderabad", km: 780, vehicle: "—", driver: "—", start: "Oct 4", fuel: 0, status: "Planned" },
+];
+export const expenses = [
+  { id: "EX-711", date: "Oct 1", category: "Fuel", trip: "TR-4411", vendor: "IOCL Thrissur", amount: 38400, status: "Approved" },
+  { id: "EX-710", date: "Oct 1", category: "Toll", trip: "TR-4412", vendor: "FASTag", amount: 6200, status: "Approved" },
+  { id: "EX-709", date: "Sep 30", category: "Repair", trip: "—", vendor: "Shree Auto Works", amount: 42500, status: "Submitted" },
+  { id: "EX-708", date: "Sep 30", category: "Driver allowance", trip: "TR-4410", vendor: "Ajay Verma", amount: 3000, status: "Submitted" },
+  { id: "EX-707", date: "Sep 29", category: "Loading labour", trip: "TR-4409", vendor: "Delhi Hub Crew", amount: 4500, status: "Rejected" },
+];
+export const team = [
+  { id: "U-1", name: "Manisha Aneja", email: "manisha@haulwise.in", role: "Admin", status: "Active" },
+  { id: "U-2", name: "Ankit Sharma", email: "ankit@haulwise.in", role: "Manager", status: "Active" },
+  { id: "U-3", name: "Neha Rao", email: "neha@haulwise.in", role: "Accountant", status: "Active" },
+  { id: "U-4", name: "Vikas Thakur", email: "vikas@haulwise.in", role: "Dispatcher", status: "Inactive" },
+];

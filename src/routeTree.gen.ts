@@ -10,15 +10,33 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BookingsRouteImport } from './routes/bookings'
+import { Route as ContactsRouteImport } from './routes/contacts'
 import { Route as CustomersRouteImport } from './routes/customers'
+import { Route as ExpensesRouteImport } from './routes/expenses'
 import { Route as FleetRouteImport } from './routes/fleet'
+import { Route as FollowUpsRouteImport } from './routes/follow-ups'
 import { Route as InvoicesRouteImport } from './routes/invoices'
 import { Route as LeadsRouteImport } from './routes/leads'
+import { Route as QuotationsRouteImport } from './routes/quotations'
+import { Route as ReportsRouteImport } from './routes/reports'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as ShipmentsRouteImport } from './routes/shipments'
+import { Route as TripsRouteImport } from './routes/trips'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookingsRoute = BookingsRouteImport.update({
+  id: '/bookings',
+  path: '/bookings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactsRoute = ContactsRouteImport.update({
+  id: '/contacts',
+  path: '/contacts',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CustomersRoute = CustomersRouteImport.update({
@@ -26,9 +44,19 @@ const CustomersRoute = CustomersRouteImport.update({
   path: '/customers',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ExpensesRoute = ExpensesRouteImport.update({
+  id: '/expenses',
+  path: '/expenses',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FleetRoute = FleetRouteImport.update({
   id: '/fleet',
   path: '/fleet',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FollowUpsRoute = FollowUpsRouteImport.update({
+  id: '/follow-ups',
+  path: '/follow-ups',
   getParentRoute: () => rootRouteImport,
 } as any)
 const InvoicesRoute = InvoicesRouteImport.update({
@@ -41,60 +69,147 @@ const LeadsRoute = LeadsRouteImport.update({
   path: '/leads',
   getParentRoute: () => rootRouteImport,
 } as any)
+const QuotationsRoute = QuotationsRouteImport.update({
+  id: '/quotations',
+  path: '/quotations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportsRoute = ReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ShipmentsRoute = ShipmentsRouteImport.update({
   id: '/shipments',
   path: '/shipments',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TripsRoute = TripsRouteImport.update({
+  id: '/trips',
+  path: '/trips',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/bookings': typeof BookingsRoute
+  '/contacts': typeof ContactsRoute
   '/customers': typeof CustomersRoute
+  '/expenses': typeof ExpensesRoute
   '/fleet': typeof FleetRoute
+  '/follow-ups': typeof FollowUpsRoute
   '/invoices': typeof InvoicesRoute
   '/leads': typeof LeadsRoute
+  '/quotations': typeof QuotationsRoute
+  '/reports': typeof ReportsRoute
+  '/settings': typeof SettingsRoute
   '/shipments': typeof ShipmentsRoute
+  '/trips': typeof TripsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/bookings': typeof BookingsRoute
+  '/contacts': typeof ContactsRoute
   '/customers': typeof CustomersRoute
+  '/expenses': typeof ExpensesRoute
   '/fleet': typeof FleetRoute
+  '/follow-ups': typeof FollowUpsRoute
   '/invoices': typeof InvoicesRoute
   '/leads': typeof LeadsRoute
+  '/quotations': typeof QuotationsRoute
+  '/reports': typeof ReportsRoute
+  '/settings': typeof SettingsRoute
   '/shipments': typeof ShipmentsRoute
+  '/trips': typeof TripsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/bookings': typeof BookingsRoute
+  '/contacts': typeof ContactsRoute
   '/customers': typeof CustomersRoute
+  '/expenses': typeof ExpensesRoute
   '/fleet': typeof FleetRoute
+  '/follow-ups': typeof FollowUpsRoute
   '/invoices': typeof InvoicesRoute
   '/leads': typeof LeadsRoute
+  '/quotations': typeof QuotationsRoute
+  '/reports': typeof ReportsRoute
+  '/settings': typeof SettingsRoute
   '/shipments': typeof ShipmentsRoute
+  '/trips': typeof TripsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/customers' | '/fleet' | '/invoices' | '/leads' | '/shipments'
+    | '/'
+    | '/bookings'
+    | '/contacts'
+    | '/customers'
+    | '/expenses'
+    | '/fleet'
+    | '/follow-ups'
+    | '/invoices'
+    | '/leads'
+    | '/quotations'
+    | '/reports'
+    | '/settings'
+    | '/shipments'
+    | '/trips'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/customers' | '/fleet' | '/invoices' | '/leads' | '/shipments'
+  to:
+    | '/'
+    | '/bookings'
+    | '/contacts'
+    | '/customers'
+    | '/expenses'
+    | '/fleet'
+    | '/follow-ups'
+    | '/invoices'
+    | '/leads'
+    | '/quotations'
+    | '/reports'
+    | '/settings'
+    | '/shipments'
+    | '/trips'
   id:
     | '__root__'
     | '/'
+    | '/bookings'
+    | '/contacts'
     | '/customers'
+    | '/expenses'
     | '/fleet'
+    | '/follow-ups'
     | '/invoices'
     | '/leads'
+    | '/quotations'
+    | '/reports'
+    | '/settings'
     | '/shipments'
+    | '/trips'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BookingsRoute: typeof BookingsRoute
+  ContactsRoute: typeof ContactsRoute
   CustomersRoute: typeof CustomersRoute
+  ExpensesRoute: typeof ExpensesRoute
   FleetRoute: typeof FleetRoute
+  FollowUpsRoute: typeof FollowUpsRoute
   InvoicesRoute: typeof InvoicesRoute
   LeadsRoute: typeof LeadsRoute
+  QuotationsRoute: typeof QuotationsRoute
+  ReportsRoute: typeof ReportsRoute
+  SettingsRoute: typeof SettingsRoute
   ShipmentsRoute: typeof ShipmentsRoute
+  TripsRoute: typeof TripsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -106,6 +221,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bookings': {
+      id: '/bookings'
+      path: '/bookings'
+      fullPath: '/bookings'
+      preLoaderRoute: typeof BookingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contacts': {
+      id: '/contacts'
+      path: '/contacts'
+      fullPath: '/contacts'
+      preLoaderRoute: typeof ContactsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/customers': {
       id: '/customers'
       path: '/customers'
@@ -113,11 +242,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CustomersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/expenses': {
+      id: '/expenses'
+      path: '/expenses'
+      fullPath: '/expenses'
+      preLoaderRoute: typeof ExpensesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/fleet': {
       id: '/fleet'
       path: '/fleet'
       fullPath: '/fleet'
       preLoaderRoute: typeof FleetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/follow-ups': {
+      id: '/follow-ups'
+      path: '/follow-ups'
+      fullPath: '/follow-ups'
+      preLoaderRoute: typeof FollowUpsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/invoices': {
@@ -134,6 +277,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LeadsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/quotations': {
+      id: '/quotations'
+      path: '/quotations'
+      fullPath: '/quotations'
+      preLoaderRoute: typeof QuotationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reports': {
+      id: '/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/shipments': {
       id: '/shipments'
       path: '/shipments'
@@ -141,16 +305,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShipmentsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/trips': {
+      id: '/trips'
+      path: '/trips'
+      fullPath: '/trips'
+      preLoaderRoute: typeof TripsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BookingsRoute: BookingsRoute,
+  ContactsRoute: ContactsRoute,
   CustomersRoute: CustomersRoute,
+  ExpensesRoute: ExpensesRoute,
   FleetRoute: FleetRoute,
+  FollowUpsRoute: FollowUpsRoute,
   InvoicesRoute: InvoicesRoute,
   LeadsRoute: LeadsRoute,
+  QuotationsRoute: QuotationsRoute,
+  ReportsRoute: ReportsRoute,
+  SettingsRoute: SettingsRoute,
   ShipmentsRoute: ShipmentsRoute,
+  TripsRoute: TripsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
