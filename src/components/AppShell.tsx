@@ -2,9 +2,11 @@ import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState, type ReactNode } from "react";
+import { Button } from "@/components/ui/button";
 import {
   LayoutDashboard, Target, Building2, Package, Truck, Receipt, Users, FileText, ClipboardList,
   CalendarCheck, Route as RouteIcon, Wallet, BarChart3, Settings, Bell, Search, Plus, Menu, X, LogOut,
+  Command, ChevronDown, Activity,
 } from "lucide-react";
 
 type Item = { label: string; to?: "/dashboard" | "/leads" | "/customers" | "/shipments" | "/fleet" | "/invoices" | "/contacts" | "/follow-ups" | "/quotations" | "/bookings" | "/trips" | "/expenses" | "/reports" | "/settings"; icon: any };
@@ -21,9 +23,9 @@ function SidebarBody({ onNav }: { onNav?: () => void }) {
   const path = useRouterState({ select: (s) => s.location.pathname });
   return (
     <>
-      <div className="flex h-16 items-center gap-2.5 px-5">
-        <div className="grid h-8 w-8 place-items-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground"><Truck className="h-4 w-4" /></div>
-        <span className="font-display text-lg font-bold tracking-tight text-sidebar-accent-foreground">Haulwise</span>
+      <div className="flex h-16 items-center gap-3 border-b border-sidebar-border px-5">
+        <div className="brand-mark"><Truck className="h-4 w-4" /></div>
+        <div><span className="block font-display text-lg font-bold text-sidebar-accent-foreground">Haulwise</span><span className="block font-mono text-[8px] uppercase text-sidebar-muted">Network OS</span></div>
       </div>
       <nav className="flex-1 space-y-6 overflow-y-auto px-3 py-4">
         {nav.map((g) => (
@@ -43,6 +45,10 @@ function SidebarBody({ onNav }: { onNav?: () => void }) {
           </div>
         ))}
       </nav>
+      <div className="m-3 rounded-lg border border-sidebar-border bg-sidebar-accent/40 p-3">
+        <p className="flex items-center gap-2 font-mono text-[9px] uppercase text-sidebar-primary"><Activity className="h-3 w-3" />System status</p>
+        <p className="mt-2 flex items-center gap-2 text-xs font-semibold text-sidebar-accent-foreground"><span className="status-pulse" />Operational</p>
+      </div>
     </>
   );
 }
@@ -61,27 +67,29 @@ export function AppShell({ children }: { children: ReactNode }) {
     navigate({ to: "/auth", replace: true });
   };
   return (
-    <div className="flex min-h-screen w-full">
-      <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col bg-sidebar lg:flex"><SidebarBody /></aside>
+    <div className="app-frame flex min-h-screen w-full">
+      <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-sidebar-border bg-sidebar lg:flex"><SidebarBody /></aside>
       {open && (
         <div className="fixed inset-0 z-50 lg:hidden">
-          <div className="absolute inset-0 bg-foreground/20" onClick={() => setOpen(false)} />
-          <aside className="relative flex h-full w-64 flex-col bg-sidebar">
-            <button onClick={() => setOpen(false)} className="absolute right-3 top-4"><X className="h-4 w-4" /></button>
+          <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" onClick={() => setOpen(false)} />
+          <aside className="relative flex h-full w-72 flex-col border-r border-sidebar-border bg-sidebar">
+            <Button onClick={() => setOpen(false)} variant="ghost" size="icon" className="absolute right-3 top-3 text-sidebar-foreground"><X /></Button>
             <SidebarBody onNav={() => setOpen(false)} />
           </aside>
         </div>
       )}
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="sticky top-0 z-40 flex h-16 items-center gap-3 border-b bg-background/70 px-4 backdrop-blur-xl sm:px-6">
-          <button onClick={() => setOpen(true)} className="btn btn-ghost h-8 w-8 p-0 lg:hidden"><Menu className="h-4 w-4" /></button>
+        <header className="top-command sticky top-0 z-40 flex h-16 items-center gap-3 border-b px-4 backdrop-blur-xl sm:px-6">
+          <Button onClick={() => setOpen(true)} variant="ghost" size="icon" className="lg:hidden"><Menu /></Button>
+          <div className="hidden min-w-fit items-center gap-2 lg:flex"><Command className="h-4 w-4 text-primary" /><span className="font-mono text-[10px] uppercase text-muted-foreground">Control room</span></div>
+          <div className="hidden h-4 w-px bg-border lg:block" />
           <div className="relative min-w-0 flex-1 max-w-md">
-            <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-            <input placeholder="Search shipments, customers, invoices…" className="field w-full rounded-full pl-9" />
+            <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+            <input aria-label="Global search" placeholder="Search tracking ID, customer, invoice…" className="field w-full pl-9" />
           </div>
           <div className="ml-auto flex shrink-0 items-center gap-2">
             <div className="relative">
-              <button onClick={() => setQuick(!quick)} className="btn btn-primary"><Plus className="h-4 w-4" /><span className="hidden sm:inline">New</span></button>
+              <Button onClick={() => setQuick(!quick)}><Plus /><span className="hidden sm:inline">New record</span><ChevronDown className="hidden h-3 w-3 sm:block" /></Button>
               {quick && (
                 <div className="surface absolute right-0 z-50 mt-2 w-44 p-1 text-sm">
                   {([["Lead", "/leads"], ["Quotation", "/quotations"], ["Booking", "/bookings"], ["Shipment", "/shipments"], ["Invoice", "/invoices"]] as const).map(([x, to]) => (
@@ -90,20 +98,20 @@ export function AppShell({ children }: { children: ReactNode }) {
                 </div>
               )}
             </div>
-            <button className="btn btn-ghost relative h-8 w-8 p-0"><Bell className="h-4 w-4" /><span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-danger" /></button>
+            <Button aria-label="Notifications" variant="ghost" size="icon" className="relative"><Bell /><span className="absolute right-2 top-2 h-1.5 w-1.5 rounded-full bg-danger" /></Button>
             <div className="relative">
-              <button onClick={() => setMenu(!menu)} className="grid h-8 w-8 place-items-center rounded-full bg-lime text-xs font-bold uppercase text-lime-foreground ring-2 ring-background">{email.slice(0, 2) || "··"}</button>
+              <Button aria-label="Account menu" onClick={() => setMenu(!menu)} variant="outline" size="icon" className="font-mono text-[10px] uppercase">{email.slice(0, 2) || "··"}</Button>
               {menu && (
                 <div className="surface absolute right-0 z-50 mt-2 w-56 p-1 text-sm">
                   <p className="truncate px-3 py-2 text-xs text-muted-foreground">{email}</p>
                   <Link to="/settings" onClick={() => setMenu(false)} className="block rounded px-3 py-2 hover:bg-muted">Settings</Link>
-                  <button onClick={signOut} className="flex w-full items-center gap-2 rounded px-3 py-2 text-left text-danger hover:bg-muted"><LogOut className="h-4 w-4" />Sign out</button>
+                  <Button onClick={signOut} variant="ghost" className="w-full justify-start text-danger"><LogOut />Sign out</Button>
                 </div>
               )}
             </div>
           </div>
         </header>
-        <main className="flex-1 p-4 sm:p-6 lg:p-8">{children}</main>
+        <main className="workspace flex-1 p-4 sm:p-6 lg:p-8">{children}</main>
       </div>
     </div>
   );

@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep all application surfaces controlled by semantic CSS tokens and the shared appearance provider so theme, typography, and density remain user-switchable.
