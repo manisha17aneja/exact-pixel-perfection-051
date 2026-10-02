@@ -3,6 +3,7 @@ import { toast } from "sonner";
 import { Trash2 } from "lucide-react";
 import { DataTable, Drawer, PageHeader, type Col } from "@/components/kit";
 import { useDeleteRows, useRows, useSaveRow, type TableName } from "@/lib/db";
+import { Button } from "@/components/ui/button";
 
 export type FieldDef = { key: string; label: string; type?: "text" | "number" | "select"; options?: string[]; required?: boolean };
 
@@ -73,13 +74,13 @@ export function CrudPage({
               )}
             </label>
           ))}
-          <button onClick={submit} disabled={save.isPending} className="btn btn-primary w-full justify-center disabled:opacity-60">
+          <Button onClick={submit} disabled={save.isPending} className="w-full">
             {save.isPending ? "Saving…" : editing ? "Save changes" : "Create"}
-          </button>
+          </Button>
           {editing && (
-            <button onClick={() => remove([editing[idKey]])} className="btn btn-outline w-full justify-center text-danger">
+            <Button onClick={() => remove([editing[idKey]])} variant="outline" className="w-full text-danger">
               <Trash2 className="h-4 w-4" />Delete
-            </button>
+            </Button>
           )}
         </div>
       </Drawer>
