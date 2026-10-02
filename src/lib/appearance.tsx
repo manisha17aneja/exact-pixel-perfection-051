@@ -25,9 +25,9 @@ export function AppearanceProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     try {
       const saved = JSON.parse(window.localStorage.getItem(STORAGE_KEY) ?? "{}") as Partial<typeof DEFAULTS>;
-      if (saved.theme) setTheme(saved.theme);
-      if (saved.font) setFont(saved.font);
-      if (saved.density) setDensity(saved.density);
+      if (saved["theme"]) setTheme(saved["theme"]);
+      if (saved["font"]) setFont(saved["font"]);
+      if (saved["density"]) setDensity(saved["density"]);
     } catch {
       window.localStorage.removeItem(STORAGE_KEY);
     }
