@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import type { CSSProperties } from "react";
 import {
   Area,
   AreaChart,
@@ -182,7 +183,7 @@ function Dashboard() {
               <RouteIcon className="h-5 w-5 text-sidebar-primary" />
             </div>
             <div className="mt-7 flex items-center justify-between gap-4">
-              <div className="relative grid h-28 w-28 shrink-0 place-items-center rounded-full fleet-ring" style={{ "--fleet-value": `${utilization * 3.6}deg` } as React.CSSProperties}>
+              <div className="relative grid h-28 w-28 shrink-0 place-items-center rounded-full fleet-ring" style={{ "--fleet-value": `${utilization * 3.6}deg` } as CSSProperties}>
                 <div className="grid h-20 w-20 place-items-center rounded-full bg-sidebar">
                   <div className="text-center"><p className="font-display text-2xl font-bold">{utilization}%</p><p className="text-[9px] uppercase text-sidebar-muted">Active</p></div>
                 </div>
