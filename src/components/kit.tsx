@@ -18,7 +18,7 @@ export function PageHeader({ crumb, title, desc, action }: { crumb: string; titl
     <div className="page-heading mb-6 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4 border-b pb-5">
       <div className="min-w-0">
         <p className="font-mono text-[10px] uppercase text-primary">{crumb}</p>
-        <h1 className="mt-2 truncate font-display text-2xl font-semibold">{title}</h1>
+        <h1 className="mt-2 font-display text-2xl font-semibold sm:text-3xl">{title}</h1>
         <p className="mt-1 hidden text-sm text-muted-foreground sm:block">{desc}</p>
       </div>
       {action}
@@ -52,7 +52,7 @@ export function DataTable<T extends Record<string, any>>({
   const [f, setF] = useState("All");
   const [sel, setSel] = useState<Set<string>>(new Set());
   const [page, setPage] = useState(0);
-  const per = 5;
+  const per = 8;
   const filtered = useMemo(
     () => rows.filter((r) =>
       (f === "All" || !filterKey || r[filterKey] === f) &&

@@ -1,7 +1,7 @@
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState, type ComponentType, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import {
   LayoutDashboard, Target, Building2, Package, Truck, Receipt, Users, FileText, ClipboardList,
@@ -9,7 +9,7 @@ import {
   Command, ChevronDown, Activity,
 } from "lucide-react";
 
-type Item = { label: string; to?: "/dashboard" | "/leads" | "/customers" | "/shipments" | "/fleet" | "/invoices" | "/contacts" | "/follow-ups" | "/quotations" | "/bookings" | "/trips" | "/expenses" | "/reports" | "/settings"; icon: any };
+type Item = { label: string; to?: "/dashboard" | "/leads" | "/customers" | "/shipments" | "/fleet" | "/invoices" | "/contacts" | "/follow-ups" | "/quotations" | "/bookings" | "/trips" | "/expenses" | "/reports" | "/settings"; icon: ComponentType<{ className?: string }> };
 const nav: { section: string; items: Item[] }[] = [
   { section: "Overview", items: [{ label: "Dashboard", to: "/dashboard", icon: LayoutDashboard }] },
   { section: "CRM", items: [{ label: "Leads", to: "/leads", icon: Target }, { label: "Customers", to: "/customers", icon: Building2 }, { label: "Contacts", to: "/contacts", icon: Users }, { label: "Follow-ups", to: "/follow-ups", icon: CalendarCheck }] },
@@ -83,7 +83,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           <Button onClick={() => setOpen(true)} variant="ghost" size="icon" className="lg:hidden"><Menu /></Button>
           <div className="hidden min-w-fit items-center gap-2 lg:flex"><Command className="h-4 w-4 text-primary" /><span className="font-mono text-[10px] uppercase text-muted-foreground">Control room</span></div>
           <div className="hidden h-4 w-px bg-border lg:block" />
-          <div className="relative min-w-0 flex-1 max-w-md">
+          <div className="relative hidden min-w-0 max-w-md flex-1 sm:block">
             <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
             <input aria-label="Global search" placeholder="Search tracking ID, customer, invoice…" className="field w-full pl-9" />
           </div>
