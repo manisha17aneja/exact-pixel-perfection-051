@@ -354,9 +354,11 @@ h1, h2, h3 { font-family: var(--font-display); letter-spacing: 0; }
 .data-grid input[type="checkbox"] { accent-color: var(--primary); }
 .table-toolbar { background: color-mix(in oklab, var(--card) 82%, transparent); }
 .drawer-panel { background: color-mix(in oklab, var(--card) 94%, transparent); backdrop-filter: blur(22px); }
+.metric-card:hover { transform: translateY(-2px); border-color: color-mix(in oklab, var(--primary) 38%, var(--border)); }
 
 @media (max-width: 639px) {
   .workspace { padding: 1rem; }
   .page-heading { grid-template-columns: minmax(0, 1fr); }
   .auth-panel { padding: 1.5rem; }
+  .pipeline-grid > div:first-child { display: none; }
 }

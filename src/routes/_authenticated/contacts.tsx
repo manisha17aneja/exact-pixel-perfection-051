@@ -12,6 +12,8 @@ export const Route = createFileRoute("/_authenticated/contacts")({
       { name: "description", content: "People you work with at each customer account." },
       { property: "og:title", content: "Contacts — Haulwise Logistics CRM" },
       { property: "og:description", content: "People you work with at each customer account." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: ContactsPage,

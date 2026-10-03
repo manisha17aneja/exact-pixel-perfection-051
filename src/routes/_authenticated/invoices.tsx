@@ -12,6 +12,8 @@ export const Route = createFileRoute("/_authenticated/invoices")({
       { name: "description", content: "Billing and collections for completed shipments." },
       { property: "og:title", content: "Invoices — Haulwise Logistics CRM" },
       { property: "og:description", content: "Billing and collections for completed shipments." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: InvoicesPage,

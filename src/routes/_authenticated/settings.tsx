@@ -23,7 +23,7 @@ export const Route = createFileRoute("/_authenticated/settings")({
 
 const ROLES = ["admin", "manager", "dispatcher", "accountant"] as const;
 type Role = (typeof ROLES)[number];
-const cap = (r: string) => r[0]!.toUpperCase() + r.slice(1);
+const cap = (r: string) => (r[0]?.toUpperCase() ?? "") + r.slice(1);
 const perms: [string, string][] = [
   ["Admin", "Everything, including users and roles"],
   ["Manager", "CRM, sales, operations and reports"],

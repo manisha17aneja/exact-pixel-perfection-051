@@ -12,6 +12,8 @@ export const Route = createFileRoute("/_authenticated/follow-ups")({
       { name: "description", content: "Calls, reminders and meetings owed to customers." },
       { property: "og:title", content: "Follow-ups — Haulwise Logistics CRM" },
       { property: "og:description", content: "Calls, reminders and meetings owed to customers." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: FollowUpsPage,
