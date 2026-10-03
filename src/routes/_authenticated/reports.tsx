@@ -19,7 +19,7 @@ export const Route = createFileRoute("/_authenticated/reports")({
   component: ReportsPage,
 });
 
-const tooltipStyle = { background: "var(--popover)", border: "1px solid var(--border)", borderRadius: "8px", boxShadow: "var(--shadow-soft)", fontSize: "12px" };
+const tooltipStyle = { background: "var(--popover)", border: "1px solid var(--border)", borderRadius: "4px", boxShadow: "var(--shadow-soft)", fontSize: "12px" };
 const pieColors = ["var(--primary)", "var(--success)", "var(--warning)", "var(--chart-4)", "var(--danger)"];
 
 function Insight({ label, value, change, icon: Icon, down = false }: { label: string; value: string; change: string; icon: typeof Gauge; down?: boolean }) {
