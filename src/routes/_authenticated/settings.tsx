@@ -4,6 +4,8 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Card, PageHeader, StatusBadge } from "@/components/kit";
 import { supabase } from "@/integrations/supabase/client";
+import { Button } from "@/components/ui/button";
+import { useAppearance, type DensityPreset, type FontPreset, type ThemePreset } from "@/lib/appearance";
 
 export const Route = createFileRoute("/_authenticated/settings")({
   head: () => ({
@@ -12,6 +14,8 @@ export const Route = createFileRoute("/_authenticated/settings")({
       { name: "description", content: "Your profile, team members and roles." },
       { property: "og:title", content: "Settings — Haulwise Logistics CRM" },
       { property: "og:description", content: "Your profile, team members and roles." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: SettingsPage,
@@ -19,7 +23,7 @@ export const Route = createFileRoute("/_authenticated/settings")({
 
 const ROLES = ["admin", "manager", "dispatcher", "accountant"] as const;
 type Role = (typeof ROLES)[number];
-const cap = (r: string) => r[0]!.toUpperCase() + r.slice(1);
+const cap = (r: string) => (r[0]?.toUpperCase() ?? "") + r.slice(1);
 const perms: [string, string][] = [
   ["Admin", "Everything, including users and roles"],
   ["Manager", "CRM, sales, operations and reports"],
@@ -29,6 +33,7 @@ const perms: [string, string][] = [
 
 function SettingsPage() {
   const [tab, setTab] = useState("Profile");
+  const { theme, font, density, setTheme, setFont, setDensity } = useAppearance();
   const qc = useQueryClient();
   const { data } = useQuery({
     queryKey: ["team"],
@@ -50,7 +55,8 @@ function SettingsPage() {
   const [name, setName] = useState<string | null>(null);
 
   const saveName = async () => {
-    const { error } = await supabase.from("profiles").update({ name: name ?? "" }).eq("id", data!.me!);
+    if (!data?.me) return;
+    const { error } = await supabase.from("profiles").update({ name: name ?? "" }).eq("id", data.me);
     if (error) { toast.error(error.message); return; }
     toast.success("Profile saved"); qc.invalidateQueries({ queryKey: ["team"] });
   };
@@ -64,9 +70,9 @@ function SettingsPage() {
   return (
     <>
       <PageHeader crumb="Insights / Settings" title="Settings" desc="Manage your profile and who can access what." />
-      <div className="mb-4 flex gap-1 border-b">
-        {["Profile", "Team", "Roles"].map((t) => (
-          <button key={t} onClick={() => setTab(t)} className={`-mb-px border-b-2 px-3 py-2 text-sm ${tab === t ? "border-primary font-medium" : "border-transparent text-muted-foreground"}`}>{t}</button>
+      <div className="mb-5 flex gap-1 overflow-x-auto border-b" role="tablist">
+        {["Profile", "Appearance", "Team", "Roles"].map((t) => (
+          <Button key={t} type="button" role="tab" aria-selected={tab === t} onClick={() => setTab(t)} variant="ghost" className={`settings-tab rounded-none border-b-2 ${tab === t ? "border-primary text-foreground" : "border-transparent text-muted-foreground"}`}>{t}</Button>
         ))}
       </div>
       {tab === "Profile" && mine && (
@@ -76,8 +82,15 @@ function SettingsPage() {
           <label className="block text-sm"><span className="mb-1 block text-muted-foreground">Email</span>
             <input value={mine.email} disabled className="field w-full opacity-60" /></label>
           <p className="text-sm text-muted-foreground">Your role: <StatusBadge status={cap(mine.role)} /></p>
-          <button onClick={saveName} className="btn btn-primary">Save profile</button>
+          <Button onClick={saveName}>Save profile</Button>
         </Card>
+      )}
+      {tab === "Appearance" && (
+        <div className="grid gap-5 xl:grid-cols-3">
+          <AppearanceGroup title="Visual theme" description="Choose the workspace contrast and surface system." value={theme} onChange={(value) => setTheme(value as ThemePreset)} options={[['cyber', 'Cyber glass', 'Deep operational surfaces with electric signals'], ['graphite', 'Graphite', 'Neutral dark workspace for long sessions'], ['light', 'Light enterprise', 'Bright, crisp and presentation-ready']]} />
+          <AppearanceGroup title="Typography" description="Set the information character across every page." value={font} onChange={(value) => setFont(value as FontPreset)} options={[['jakarta', 'Modern', 'Clear, balanced interface type'], ['technical', 'Technical', 'Precision-led command typography'], ['editorial', 'Editorial', 'Confident headings with readable body text']]} />
+          <AppearanceGroup title="Density" description="Control how much information fits on screen." value={density} onChange={(value) => setDensity(value as DensityPreset)} options={[['compact', 'Compact', 'Maximum data visibility'], ['comfortable', 'Comfortable', 'Balanced default spacing'], ['spacious', 'Spacious', 'Relaxed scanning and touch targets']]} />
+        </div>
       )}
       {tab === "Team" && (
         <Card className="divide-y">
@@ -105,5 +118,22 @@ function SettingsPage() {
         </Card>
       )}
     </>
+  );
+}
+
+function AppearanceGroup({ title, description, value, onChange, options }: { title: string; description: string; value: string; onChange: (value: string) => void; options: [string, string, string][] }) {
+  return (
+    <Card className="p-5">
+      <p className="font-display text-base font-semibold">{title}</p>
+      <p className="mt-1 text-xs leading-5 text-muted-foreground">{description}</p>
+      <div className="mt-5 space-y-2">
+        {options.map(([key, label, note]) => (
+          <Button key={key} type="button" onClick={() => onChange(key)} variant="outline" className={`h-auto w-full justify-start px-4 py-3 text-left ${value === key ? "appearance-choice" : ""}`}>
+            <span className="min-w-0"><span className="block text-sm font-semibold">{label}</span><span className="mt-0.5 block whitespace-normal text-xs font-normal text-muted-foreground">{note}</span></span>
+            <span className={`ml-auto h-2.5 w-2.5 shrink-0 rounded-full ${value === key ? "bg-primary" : "bg-muted"}`} />
+          </Button>
+        ))}
+      </div>
+    </Card>
   );
 }

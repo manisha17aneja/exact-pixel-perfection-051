@@ -12,6 +12,8 @@ export const Route = createFileRoute("/_authenticated/leads")({
       { name: "description", content: "Prospective shippers and their expected lane value." },
       { property: "og:title", content: "Leads — Haulwise Logistics CRM" },
       { property: "og:description", content: "Prospective shippers and their expected lane value." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: LeadsPage,

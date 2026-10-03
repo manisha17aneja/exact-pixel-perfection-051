@@ -12,6 +12,8 @@ export const Route = createFileRoute("/_authenticated/trips")({
       { name: "description", content: "Vehicle trips, distance and fuel spend per route." },
       { property: "og:title", content: "Trips & Routes — Haulwise Logistics CRM" },
       { property: "og:description", content: "Vehicle trips, distance and fuel spend per route." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: TripsPage,

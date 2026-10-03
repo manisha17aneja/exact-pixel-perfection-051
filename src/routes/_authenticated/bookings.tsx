@@ -12,6 +12,8 @@ export const Route = createFileRoute("/_authenticated/bookings")({
       { name: "description", content: "Confirmed loads waiting for pickup." },
       { property: "og:title", content: "Bookings — Haulwise Logistics CRM" },
       { property: "og:description", content: "Confirmed loads waiting for pickup." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: BookingsPage,

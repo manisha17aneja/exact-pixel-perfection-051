@@ -12,6 +12,8 @@ export const Route = createFileRoute("/_authenticated/fleet")({
       { name: "description", content: "Your trucks, trailers and reefers at a glance." },
       { property: "og:title", content: "Fleet — Haulwise Logistics CRM" },
       { property: "og:description", content: "Your trucks, trailers and reefers at a glance." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: FleetPage,

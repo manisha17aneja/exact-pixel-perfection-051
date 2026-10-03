@@ -12,6 +12,8 @@ export const Route = createFileRoute("/_authenticated/quotations")({
       { name: "description", content: "Freight rate quotes sent to customers." },
       { property: "og:title", content: "Quotations — Haulwise Logistics CRM" },
       { property: "og:description", content: "Freight rate quotes sent to customers." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: QuotationsPage,

@@ -12,6 +12,8 @@ export const Route = createFileRoute("/_authenticated/expenses")({
       { name: "description", content: "Fuel, tolls, repairs and other trip costs." },
       { property: "og:title", content: "Expenses — Haulwise Logistics CRM" },
       { property: "og:description", content: "Fuel, tolls, repairs and other trip costs." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: ExpensesPage,

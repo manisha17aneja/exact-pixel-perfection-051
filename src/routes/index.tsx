@@ -10,6 +10,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "One CRM for leads, shipments, fleet, trips, invoices and payments." },
       { property: "og:title", content: "Haulwise — Logistics & Transport CRM" },
       { property: "og:description", content: "One CRM for leads, shipments, fleet, trips, invoices and payments." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Index,

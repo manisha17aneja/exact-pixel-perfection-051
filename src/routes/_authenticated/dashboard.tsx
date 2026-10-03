@@ -39,7 +39,7 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
 const tooltipStyle = {
   background: "var(--popover)",
   border: "1px solid var(--border)",
-  borderRadius: "8px",
+  borderRadius: "4px",
   boxShadow: "var(--shadow-soft)",
   fontSize: "12px",
 };
@@ -66,7 +66,7 @@ function MetricCard({
     danger: "bg-danger/10 text-danger",
   }[tone];
   return (
-    <Card className="group dashboard-card p-5">
+    <Card className="group dashboard-card metric-card p-5">
       <div className="flex items-start justify-between gap-3">
         <div className={`grid h-10 w-10 place-items-center rounded-lg ${toneClass}`}><Icon className="h-5 w-5" /></div>
         <span className={`rounded-full px-2.5 py-1 text-[10px] font-bold ${toneClass}`}>{detail}</span>
@@ -75,7 +75,7 @@ function MetricCard({
       <p className="mt-1 font-display text-2xl font-bold tabular-nums">{value}</p>
       <div className="mt-4 flex h-7 items-end gap-1.5" aria-hidden="true">
         {(bars ?? [38, 58, 45, 74, 62, 88, 76]).map((height, index) => (
-          <span key={index} className={`min-w-0 flex-1 rounded-t-sm ${index >= 5 ? "bg-primary" : "bg-primary/15"}`} style={{ height: `${height}%` }} />
+          <span key={index} className={`min-w-0 flex-1 rounded-t-sm ${index >= 5 ? "bg-primary" : "bg-primary/25"}`} style={{ height: `${height}%` }} />
         ))}
       </div>
     </Card>
@@ -127,8 +127,8 @@ function Dashboard() {
               </div>
               <Link to="/shipments" className="inline-flex items-center gap-1 text-xs font-bold text-primary">Manage flow <ArrowRight className="h-3.5 w-3.5" /></Link>
             </div>
-            <div className="mt-7 overflow-x-auto pb-1">
-              <div className="relative grid min-w-[620px] grid-cols-6">
+            <div className="mt-7 pb-1">
+              <div className="pipeline-grid relative grid grid-cols-2 gap-y-6 sm:grid-cols-3 lg:grid-cols-6">
                 <div className="absolute left-[8%] right-[8%] top-4 h-0.5 bg-border" />
                 {flow.map(([label, count, to], index) => (
                   <Link key={label} to={to} className="group relative z-10 flex flex-col items-center text-center">
@@ -158,8 +158,8 @@ function Dashboard() {
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={revenueTrend} margin={{ top: 8, right: 4, left: -18, bottom: 0 }}>
                   <defs>
-                    <linearGradient id="revenueFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="var(--primary)" stopOpacity={0.24} /><stop offset="100%" stopColor="var(--primary)" stopOpacity={0} /></linearGradient>
-                    <linearGradient id="expenseFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="var(--warning)" stopOpacity={0.18} /><stop offset="100%" stopColor="var(--warning)" stopOpacity={0} /></linearGradient>
+                    <linearGradient id="revenueFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="var(--primary)" stopOpacity={0.42} /><stop offset="100%" stopColor="var(--primary)" stopOpacity={0} /></linearGradient>
+                    <linearGradient id="expenseFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="var(--warning)" stopOpacity={0.3} /><stop offset="100%" stopColor="var(--warning)" stopOpacity={0} /></linearGradient>
                   </defs>
                   <CartesianGrid stroke="var(--border)" strokeDasharray="3 5" vertical={false} />
                   <XAxis dataKey="m" stroke="var(--muted-foreground)" fontSize={11} tickLine={false} axisLine={false} tickMargin={10} />
