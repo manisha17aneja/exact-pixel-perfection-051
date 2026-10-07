@@ -35,9 +35,9 @@ export function AppearanceProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const root = document.documentElement;
-    root.dataset.theme = theme;
-    root.dataset.font = font;
-    root.dataset.density = density;
+    root.dataset["theme"] = theme;
+    root.dataset["font"] = font;
+    root.dataset["density"] = density;
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ theme, font, density }));
   }, [theme, font, density]);
 
