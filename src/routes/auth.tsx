@@ -27,6 +27,8 @@ function AuthPage() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [busy, setBusy] = useState(false);
+  const appUrl = () => new URL(import.meta.env.BASE_URL, window.location.origin).toString();
+  const resetUrl = () => new URL(`${import.meta.env.BASE_URL}reset-password`, window.location.origin).toString();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => data.session && navigate({ to: "/dashboard", replace: true }));
@@ -42,12 +44,12 @@ function AuthPage() {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
       } else if (mode === "up") {
-        const { error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: window.location.origin, data: { full_name: name } } });
+        const { error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: appUrl(), data: { full_name: name } } });
         if (error) throw error;
         toast.success("Check your email to confirm your account.");
         setMode("in");
       } else {
-        const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: `${window.location.origin}/reset-password` });
+        const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: resetUrl() });
         if (error) throw error;
         toast.success("Password reset link sent to your email.");
         setMode("in");
@@ -57,7 +59,7 @@ function AuthPage() {
   };
 
   const google = async () => {
-    const r = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin });
+    const r = await lovable.auth.signInWithOAuth("google", { redirect_uri: appUrl() });
     if (r.error) toast.error(r.error.message ?? "Google sign-in failed");
   };
 

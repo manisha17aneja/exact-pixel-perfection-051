@@ -7,6 +7,7 @@ export const getRouter = () => {
 
   const router = createRouter({
     routeTree,
+    basepath: "/exact-pixel-perfection-051",
     context: { queryClient },
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,
