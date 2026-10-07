@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Keep all application surfaces controlled by semantic CSS tokens and the shared appearance provider so theme, typography, and density remain user-switchable.
+- Build as a TanStack Start SPA shell under the repository base path and deploy `dist/client` so GitHub Pages can host every client route.

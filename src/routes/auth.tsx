@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ComponentType } from "react";
 import { toast } from "sonner";
 import { Activity, ArrowRight, Boxes, CheckCircle2, Truck } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -27,6 +27,8 @@ function AuthPage() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [busy, setBusy] = useState(false);
+  const appUrl = () => new URL(import.meta.env.BASE_URL, window.location.origin).toString();
+  const resetUrl = () => new URL(`${import.meta.env.BASE_URL}reset-password`, window.location.origin).toString();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => data.session && navigate({ to: "/dashboard", replace: true }));
@@ -42,12 +44,12 @@ function AuthPage() {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
       } else if (mode === "up") {
-        const { error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: window.location.origin, data: { full_name: name } } });
+        const { error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: appUrl(), data: { full_name: name } } });
         if (error) throw error;
         toast.success("Check your email to confirm your account.");
         setMode("in");
       } else {
-        const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: `${window.location.origin}/reset-password` });
+        const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: resetUrl() });
         if (error) throw error;
         toast.success("Password reset link sent to your email.");
         setMode("in");
@@ -57,9 +59,11 @@ function AuthPage() {
   };
 
   const google = async () => {
-    const r = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin });
+    const r = await lovable.auth.signInWithOAuth("google", { redirect_uri: appUrl() });
     if (r.error) toast.error(r.error.message ?? "Google sign-in failed");
   };
+
+  const telemetry: [string, ComponentType<{ className?: string }>] [] = [["Live network", Activity], ["Unified fleet", Truck], ["End-to-end flow", Boxes]];
 
   return (
     <div className="auth-grid min-h-screen bg-background p-4 lg:grid lg:grid-cols-[minmax(0,1.15fr)_minmax(380px,.85fr)] lg:p-6">
@@ -73,7 +77,7 @@ function AuthPage() {
           <h1 className="mt-5 max-w-xl font-display text-5xl font-semibold leading-[1.05]">Every shipment. One operational command layer.</h1>
           <p className="mt-5 max-w-lg text-sm leading-7 text-muted-foreground">Run sales, dispatch, fleet and finance from a single high-clarity workspace built for transport teams.</p>
           <div className="mt-8 grid max-w-xl grid-cols-3 gap-3">
-            {[['Live network', Activity], ['Unified fleet', Truck], ['End-to-end flow', Boxes]].map(([label, Icon]) => <div key={String(label)} className="telemetry-tile"><Icon className="h-4 w-4 text-primary" /><span>{String(label)}</span></div>)}
+            {telemetry.map(([label, Icon]) => <div key={label} className="telemetry-tile"><Icon className="h-4 w-4 text-primary" /><span>{label}</span></div>)}
           </div>
         </div>
         <p className="relative z-10 flex items-center gap-2 font-mono text-[9px] uppercase text-muted-foreground"><CheckCircle2 className="h-3.5 w-3.5 text-success" />Secure workspace connection</p>

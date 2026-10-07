@@ -7,9 +7,17 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
-  tanstackStart: {
-    // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-    // nitro/vite builds from this
-    server: { entry: "server" },
+  vite: {
+    base: "/exact-pixel-perfection-051/",
   },
+  tanstackStart: {
+    router: { basepath: "/exact-pixel-perfection-051" },
+    spa: {
+      enabled: true,
+      maskPath: "/exact-pixel-perfection-051/",
+      prerender: { outputPath: "/exact-pixel-perfection-051/index" },
+    },
+    sitemap: { enabled: false },
+  },
+  nitro: false,
 });
