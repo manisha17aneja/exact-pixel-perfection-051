@@ -5,6 +5,6 @@
 - [x] Restyle dashboard and reports charts for the selected direction.
 - [x] Redesign sign-in, reset, settings, error, and not-found screens.
 - [x] Complete route metadata requirements.
-- [ ] Verify all routes on desktop and mobile.
-- [ ] Configure static GitHub Pages output under `/exact-pixel-perfection-051/`.
-- [ ] Add a GitHub Actions Pages deployment workflow.
+- [x] Verify all routes on desktop and mobile.
+- [x] Configure static GitHub Pages output under `/exact-pixel-perfection-051/`.
+- [x] Add a GitHub Actions Pages deployment workflow.
