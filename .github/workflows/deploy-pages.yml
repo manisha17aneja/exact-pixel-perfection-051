@@ -32,9 +32,9 @@ jobs:
       - name: Build static app
         run: bun run build
         env:
-          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
-          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
-          VITE_SUPABASE_PROJECT_ID: ${{ secrets.VITE_SUPABASE_PROJECT_ID }}
+          VITE_SUPABASE_URL: "https://tuhsnezlciyyqaqicrfy.supabase.co"
+          VITE_SUPABASE_PUBLISHABLE_KEY: "sb_publishable_7cYMnoqdxzB1kfr6gANqzA_yre1ZApQ"
+          VITE_SUPABASE_PROJECT_ID: "tuhsnezlciyyqaqicrfy"
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
