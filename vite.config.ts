@@ -6,16 +6,19 @@
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
+// GitHub Pages serves the app under the repository sub-path; Netlify serves it at the domain root.
+const basePath = process.env.NETLIFY ? "" : "/exact-pixel-perfection-051";
+
 export default defineConfig({
   vite: {
-    base: "/exact-pixel-perfection-051/",
+    base: `${basePath}/`,
   },
   tanstackStart: {
-    router: { basepath: "/exact-pixel-perfection-051" },
+    router: { basepath: basePath || "/" },
     spa: {
       enabled: true,
-      maskPath: "/exact-pixel-perfection-051/",
-      prerender: { outputPath: "/exact-pixel-perfection-051/index" },
+      maskPath: `${basePath}/`,
+      prerender: { outputPath: `${basePath}/index` },
     },
     sitemap: { enabled: false },
   },
